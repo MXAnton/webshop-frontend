@@ -1,0 +1,130 @@
+@import "reset.css";
+@import "vars.css";
+
+/* ___ DROPDOWN ___ */
+.dropdown-1 {
+  position: relative;
+}
+
+.dropdown-1 button {
+  font-weight: 600;
+  font-size: 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+
+  transition: opacity 0.2s ease-in-out;
+}
+.dropdown-1 button:hover {
+  opacity: 0.8;
+}
+.dropdown-1 button svg {
+  transition: transform 0.2s ease-in-out;
+}
+.dropdown-1 button:hover svg,
+.dropdown-1 button:focus svg {
+  transform: translateY(20%) rotateZ(-180deg);
+}
+
+.dropdown__content {
+  position: absolute;
+  top: 100%;
+
+  visibility: hidden;
+  pointer-events: none;
+  height: 0;
+  width: max-content;
+  opacity: 0;
+
+  overflow: hidden;
+
+  background-color: var(--color-text);
+
+  font-size: 1rem;
+
+  padding: 1em 0.8em 1.3em;
+  border-radius: 2px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+
+  transition: height 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+.dropdown__content li > * {
+  color: var(--color-background);
+}
+.dropdown-1:hover .dropdown__content,
+.dropdown-1 button:focus ~ .dropdown__content {
+  visibility: visible;
+  pointer-events: all;
+  height: auto;
+  opacity: 1;
+}
+
+/* ___ INPUT ___ */
+.input-1--search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-right: 0.285em;
+
+  font-size: 0.875rem;
+
+  width: 238px;
+
+  border: 1px solid var(--color-secondary);
+  border-radius: 3px;
+}
+.input-1--search input {
+  color: var(--color-text);
+
+  background: none;
+  border: none;
+
+  width: 100%;
+
+  padding: 0.57em 0.285em 0.57em 0.5em;
+}
+.input-1--search input:focus {
+  outline: none;
+}
+.input-1--search:has(input:focus) {
+  border-color: var(--yellow);
+}
+.input-1--search input::placeholder {
+  color: var(--color-secondary);
+  opacity: 0.8;
+}
+
+/* ___ BUTTON ___ */
+.btn--primary {
+  display: block;
+  width: fit-content;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+
+  padding: 0.5em 1.4em;
+
+  background-color: #000;
+  color: var(--color-text);
+  border-radius: 4px;
+}
+
+/* ___ SECTIONS ___ */
+.section__wrapper {
+  height: 100%;
+  width: 100%;
+  max-width: 80rem;
+
+  padding: 1rem 4rem;
+  margin: 0 auto;
+}
+
+/* ___ GENERAL ___ */
+.mt-1 {
+  margin-top: 1rem;
+}

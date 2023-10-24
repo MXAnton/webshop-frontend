@@ -1,0 +1,14 @@
+:root {
+  --white: #d9d9d9;
+  --white-2: #bfc5c5;
+  --black: #131515;
+
+  --blue: #739dee;
+  --yellow: #f0c777;
+  --yellow-2: #fc9a00;
+
+  --color-text: var(--white);
+  --color-background: var(--black);
+  --color-primary: var(--blue);
+  --color-secondary: var(--white-2);
+}

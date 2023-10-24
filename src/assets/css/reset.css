@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Chivo+Mono:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  letter-spacing: 0.02em;
+}
+*:focus {
+  outline: 1px solid var(--yellow);
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+  appearance: none;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+input[type="text"] {
+  border-radius: 0;
+}
+
+button,
+a,
+label {
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 600;
+
+  transition: opacity 0.2s ease-in-out;
+}
+a:hover {
+  opacity: 0.8;
+}
+
+img,
+svg {
+  display: block;
+}
+
+body {
+  width: 100%;
+  margin: 0 auto;
+
+  font: 1rem "Poppins", sans-serif; /* BODY TEXT */
+  color: var(--color-text);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Chivo Mono", monospace; /* HEADERS */
+  letter-spacing: 0.03em;
+  margin: 0;
+  font-weight: 900;
+}
+p {
+  margin: 0;
+}
+
+h1,
+.h1-size {
+  font-size: 4rem;
+}
+h2,
+.h2-size {
+  font-size: 3rem;
+}
+h3,
+.h3-size {
+  font-size: 2rem;
+}
+h4,
+.h4-size {
+  font-size: 1.25rem;
+}
+
+.logo-font {
+  font-family: "Arvo", serif; /* LOGO FONT */
+}
+
+/* FLOATING FONT SIZE */
+html {
+  font-size: calc(0.625rem + 0.41666666666666663vw);
+}
+@media screen and (max-width: 1920px) {
+  html {
+    font-size: calc(0.625rem + 0.41666666666666674vw);
+  }
+}
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: calc(0.8126951092611863rem + 0.20811654526534862vw);
+  }
+}
+@media screen and (max-width: 479px) {
+  html {
+    font-size: calc(0.7494769874476988rem + 0.8368200836820083vw);
+  }
+}
+/* FLOATING FONT SIZE */
