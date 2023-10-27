@@ -1,6 +1,10 @@
 @import "reset.css";
 @import "vars.css";
 
+p.long {
+  line-height: 140%;
+}
+
 /* ___ DROPDOWN ___ */
 .dropdown-1 {
   position: relative;
