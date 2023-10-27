@@ -54,7 +54,7 @@
       </div>
     </section>
 
-    <section class="best-sellers">
+    <section class="best-sellers" id="best-sellers">
       <div class="section__wrapper">
         <h2>BEST SELLERS</h2>
 
