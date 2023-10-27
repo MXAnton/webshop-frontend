@@ -1,39 +1,30 @@
 <template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 -960 960 960"
+    viewBox="0 0 24 24"
     :height="height"
     :width="width"
-    :fill="color"
+    :class="{ 'is-add': showAddIcon }"
   >
-    <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z">
-      <animate
-        ref="animationToPlus"
-        repeatCount="1"
-        fill="freeze"
-        attributeName="d"
-        dur="500s"
-        values="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"
-      />
-      <animate
-        ref="animationToMinus"
-        repeatCount="1"
-        fill="freeze"
-        attributeName="d"
-        dur="500s"
-        values="M200-440v-80h560v80H200Z"
-      />
-    </path>
+    <line
+      x1="5"
+      y1="12"
+      x2="19"
+      y2="12"
+      stroke-width="2"
+      :stroke="color"
+      class="plus"
+    ></line>
+    <line
+      x1="12"
+      y1="5"
+      x2="12"
+      y2="19"
+      stroke-width="2"
+      :stroke="color"
+      class="minus"
+    ></line>
   </svg>
-  <!-- <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 -960 960 960"
-    :height="height"
-    :width="width"
-    :fill="color"
-  >
-    <path d="M200-440v-80h560v80H200Z" />
-  </svg> -->
 </template>
 
 <script lang="ts">
@@ -59,24 +50,24 @@ export default defineComponent({
       default: true,
     },
   },
-  data() {
-    return {
-      animationToPlus: this.$refs.animationToPlus as any,
-      animationToMinus: this.$refs.animationToMinus as any,
-    };
-  },
-  watch: {
-    showAddIcon(newVal) {
-      if (newVal == true) {
-        this.animationToPlus.beginElement();
-      } else {
-        this.animationToMinus.beginElement();
-      }
-    },
-  },
-  mounted() {
-    this.animationToPlus = this.$refs.animationToPlus;
-    this.animationToMinus = this.$refs.animationToMinus;
-  },
 });
 </script>
+
+<style scoped>
+svg {
+  transform: rotateZ(180deg);
+  transition: transform 0.2s ease-in-out;
+}
+.minus {
+  transform: rotateZ(90deg);
+
+  transform-origin: center center;
+  transition: transform 0.2s ease-in-out;
+}
+.is-add {
+  transform: rotateZ(0deg);
+}
+.is-add .minus {
+  transform: rotateZ(0deg);
+}
+</style>
