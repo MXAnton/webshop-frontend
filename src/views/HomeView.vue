@@ -59,14 +59,38 @@
         <h2>BEST SELLERS</h2>
 
         <ul>
-          <li>
-            <h3>Shoe</h3>
+          <li class="product">
+            <div class="product__image-wrapper">
+              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
+              <button>
+                <FavoriteIcon width="32" height="32" />
+              </button>
+            </div>
+
+            <h3>Balboa</h3>
+            <p>€ 58</p>
           </li>
-          <li>
-            <h3>Shoe</h3>
+          <li class="product">
+            <div class="product__image-wrapper">
+              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
+              <button>
+                <FavoriteIcon width="32" height="32" />
+              </button>
+            </div>
+
+            <h3>Balboa</h3>
+            <p>€ 58</p>
           </li>
-          <li>
-            <h3>Shoe</h3>
+          <li class="product">
+            <div class="product__image-wrapper">
+              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
+              <button>
+                <FavoriteIcon width="32" height="32" />
+              </button>
+            </div>
+
+            <h3>Balboa</h3>
+            <p>€ 58</p>
           </li>
         </ul>
       </div>
@@ -80,6 +104,7 @@ import { defineComponent } from "vue";
 import LocalShippingIcon from "@/components/icons/LocalShippingIcon.vue";
 import UndoIcon from "@/components/icons/UndoIcon.vue";
 import PaymentsIcon from "@/components/icons/PaymentsIcon.vue";
+import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
 
 export default defineComponent({
   name: "HomeView",
@@ -87,6 +112,7 @@ export default defineComponent({
     LocalShippingIcon,
     UndoIcon,
     PaymentsIcon,
+    FavoriteIcon,
   },
 });
 </script>
@@ -158,7 +184,43 @@ export default defineComponent({
   display: flex;
   gap: 1rem;
 }
-.best-sellers li {
-  background-color: white;
+
+.product {
+  font-size: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product__image-wrapper {
+  position: relative;
+
+  height: 13.75em;
+
+  border-radius: 4px;
+  overflow: hidden;
+
+  color: var(--color-background);
+}
+.product__image-wrapper img {
+  height: 100%;
+  width: 100%;
+}
+.product__image-wrapper svg {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
+.product h3 {
+  font-size: 1.5em;
+  font-weight: 700;
+
+  margin-top: 0.4em;
+  margin-bottom: 0em;
+}
+.product p {
+  font-size: 1em;
 }
 </style>

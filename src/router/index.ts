@@ -4,9 +4,30 @@ import HomeView from "../views/HomeView.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+    alias: "/home",
     name: "home",
     component: HomeView,
   },
+
+  {
+    path: "/all-shoes",
+    name: "allShoes",
+    component: () =>
+      import(/* webpackChunkName: "allShoes" */ "../views/AllShoesView.vue"),
+  },
+  {
+    path: "/men",
+    name: "men",
+    component: () =>
+      import(/* webpackChunkName: "men" */ "../views/MenShoesView.vue"),
+  },
+  {
+    path: "/women",
+    name: "women",
+    component: () =>
+      import(/* webpackChunkName: "women" */ "../views/MenShoesView.vue"),
+  },
+
   {
     path: "/about",
     name: "about",

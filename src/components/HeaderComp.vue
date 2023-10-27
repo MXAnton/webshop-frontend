@@ -14,10 +14,10 @@
 
         <li>
           <div class="dropdown-1">
-            <button>
+            <router-link class="btn" to="/men">
               <span>MEN</span>
-              <ExpandMoreIcon />
-            </button>
+              <ExpandMoreIcon
+            /></router-link>
 
             <ul class="dropdown__content">
               <li>
@@ -43,10 +43,10 @@
         </li>
         <li>
           <div class="dropdown-1">
-            <button>
+            <router-link class="btn" to="/women">
               <span>WOMEN</span>
-              <ExpandMoreIcon />
-            </button>
+              <ExpandMoreIcon
+            /></router-link>
 
             <ul class="dropdown__content">
               <li>
