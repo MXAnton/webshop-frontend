@@ -1,10 +1,10 @@
 <template>
   <main>
-    <ProductsNavComp :navLevelsArray="['Home', 'Men']" />
+    <ProductsNavComp :navLevelsArray="['Home', 'Women']" />
 
     <section class="hero">
       <div class="section__wrapper">
-        <h1 class="h2-size">ALL MEN SHOES</h1>
+        <h1 class="h2-size">ALL WOMEN SHOES</h1>
       </div>
     </section>
 
@@ -26,7 +26,7 @@ import ProductsFiltersComp from "@/components/ProductsFiltersComp.vue";
 import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
 
 export default defineComponent({
-  name: "MenShoesView",
+  name: "WomenShoesView",
   components: {
     ProductsNavComp,
     ProductsFiltersComp,
