@@ -143,22 +143,31 @@ export default defineComponent({
     tl.to(".why-us__timeline", {
       scaleY: 0.15,
       duration: 0.1,
+      ease: "power1",
     })
       .to(".why-us__timeline", {
         scaleY: 0.4,
-        duration: 2.5,
+        duration: 0.3,
+        delay: 0.3,
+        ease: "power1",
       })
       .to(".why-us__timeline", {
         scaleY: 0.6,
-        duration: 2,
+        duration: 0.3,
+        delay: 0.5,
+        ease: "power1",
       })
       .to(".why-us__timeline", {
         scaleY: 0.8,
-        duration: 2,
+        duration: 0.3,
+        delay: 0.5,
+        ease: "power1",
       })
       .to(".why-us__timeline", {
         scaleY: 1,
-        duration: 2,
+        duration: 0.4,
+        delay: 0.3,
+        ease: "power1",
       });
   },
 });
@@ -211,7 +220,7 @@ section {
 .why-us__content ul {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 3rem;
 }
 .why-us__content ul h3 {
   margin-bottom: 0.2em;
