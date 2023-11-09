@@ -251,6 +251,95 @@ p.long {
 }
 
 /* ___ INPUT ___ */
+/* -- input--1 -- */
+.input--1 {
+  position: relative;
+
+  font-size: 1.25rem;
+
+  width: 100%;
+
+  border: 1px solid var(--color-secondary);
+  border-radius: 3px;
+}
+.input--1 input,
+.input--1 textarea {
+  color: var(--color-text);
+
+  background: none;
+  border: none;
+
+  width: 100%;
+  font-size: 1em;
+
+  padding: 0.5em 0.8em;
+
+  resize: none;
+}
+.input--1 input::placeholder,
+.input--1 textarea::placeholder {
+  color: var(--color-secondary);
+  opacity: 0.8;
+}
+.input--1:has(label) {
+  margin-top: 1.5em;
+}
+.input--1:has(.input--1__error-message) {
+  margin-bottom: 0.7em;
+}
+.input--1 label {
+  color: var(--color-secondary);
+  opacity: 0.8;
+  font-size: 1em;
+
+  position: absolute;
+  top: 1em;
+  left: 0.8em;
+  transform: translateY(-50%);
+
+  transition: top 0.2s ease-in-out, left 0.1s 0s ease-in-out,
+    transform 0.2s ease-in-out;
+}
+
+.input--1.has-error {
+  border-color: var(--red);
+}
+.input--1__error-message,
+.input--1__char-count {
+  font-size: 0.6em;
+  color: var(--red);
+
+  position: absolute;
+  top: calc(100% + 0.2em);
+  left: 0;
+}
+
+.input--1__char-count {
+  color: var(--color-secondary);
+  left: auto;
+  right: 0;
+}
+
+.input--1 input:focus,
+.input--1 textarea:focus {
+  outline: none;
+}
+.input--1:has(input:focus),
+.input--1:has(textarea:focus) {
+  border-color: var(--yellow);
+}
+.input--1:has(input:focus) label,
+.input--1:has(textarea:focus) label,
+.input--1.has-value label {
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+
+  transition: top 0.2s ease-in-out, left 0.1s 0.1s ease-in-out,
+    transform 0.2s ease-in-out;
+}
+
+/* -- input-1--search -- */
 .input-1--search {
   display: flex;
   justify-content: space-between;
@@ -349,7 +438,26 @@ p.long {
 
   background-color: #000;
   color: var(--color-text);
+  border: none;
   border-radius: 4px;
+}
+.btn--secondary {
+  display: block;
+  width: fit-content;
+
+  font-size: 1.25rem;
+  font-weight: 500;
+
+  padding: 0.5em 1.4em;
+
+  background: none;
+  color: var(--color-text);
+  border: 1px solid var(--color-secondary);
+  border-radius: 4px;
+}
+
+.btn--large {
+  font-size: 1.5rem;
 }
 
 /* ___ SECTIONS ___ */

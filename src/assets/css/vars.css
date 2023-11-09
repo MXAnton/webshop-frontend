@@ -6,6 +6,7 @@
   --blue: #739dee;
   --yellow: #f0c777;
   --yellow-2: #fc9a00;
+  --red: rgb(255, 80, 57);
 
   --color-text: var(--white);
   --color-background: var(--black);

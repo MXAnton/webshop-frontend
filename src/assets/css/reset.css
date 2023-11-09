@@ -67,7 +67,8 @@ button,
 a,
 label,
 select,
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="submit"] {
   cursor: pointer;
 }
 
