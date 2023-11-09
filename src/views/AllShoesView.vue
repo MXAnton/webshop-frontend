@@ -26,14 +26,35 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 5rem;
 
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
 
 .select-gender__buttons {
+  width: 100%;
+
   display: flex;
-  gap: 1.5rem;
+  gap: 3rem;
+}
+
+.select-gender__buttons .btn--primary {
+  flex: 1 1 0;
+  min-height: 30vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 3rem;
+
+  border-bottom: 0 solid black;
+
+  transition: transform 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+.select-gender__buttons .btn--primary:hover {
+  transform: translateY(-3%);
+  border-bottom: 3px solid var(--color-text);
 }
 </style>
