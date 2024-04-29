@@ -12,7 +12,7 @@
       <div class="section__wrapper">
         <ProductsFiltersComp />
 
-        <ProductsGalleryComp />
+        <ProductsGalleryComp :shoes="shoes" />
       </div>
     </section>
   </main>
@@ -25,12 +25,36 @@ import ProductsNavComp from "../components/ProductsNavComp.vue";
 import ProductsFiltersComp from "@/components/ProductsFiltersComp.vue";
 import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
 
+import { getProductsMale } from "@/services/products";
+
 export default defineComponent({
   name: "MenShoesView",
   components: {
     ProductsNavComp,
     ProductsFiltersComp,
     ProductsGalleryComp,
+  },
+
+  data() {
+    return {
+      shoes: [],
+    };
+  },
+
+  methods: {
+    async loadShoes() {
+      const res = await getProductsMale();
+      if (res == null) {
+        this.shoes = [];
+        return;
+      }
+
+      this.shoes = res.data.data;
+    },
+  },
+
+  created() {
+    this.loadShoes();
   },
 });
 </script>

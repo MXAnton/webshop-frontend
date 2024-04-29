@@ -5,6 +5,7 @@
 *::after {
   box-sizing: border-box;
   letter-spacing: 0.02em;
+  color: var(--color-text);
 }
 *:focus-visible {
   outline: 1px solid var(--yellow);

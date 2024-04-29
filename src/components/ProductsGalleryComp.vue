@@ -21,7 +21,7 @@
 
     <div class="products__gallery">
       <ul>
-        <li class="product">
+        <li class="product" v-for="shoe in shoes" :key="shoe.id">
           <div class="product__image-wrapper">
             <img src="/products/balboa-black-1.jpg" alt="Shoes" />
             <button>
@@ -29,8 +29,14 @@
             </button>
           </div>
 
-          <h3>Balboa</h3>
-          <p>€ 58</p>
+          <h3>{{ shoe.name }}</h3>
+          <p v-if="shoe.discount > 0">
+            <span class="ordinary-price">{{ shoe.price }}</span
+            ><span class="discounted-price euro">{{
+              (shoe.price - shoe.discount).toFixed(2)
+            }}</span>
+          </p>
+          <p v-else class="euro">{{ shoe.price }}</p>
         </li>
       </ul>
     </div>
@@ -43,11 +49,25 @@ import { defineComponent } from "vue";
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
 import ExpandMoreIcon from "@/components/icons/ExpandMoreIcon.vue";
 
+interface Shoe {
+  id: number;
+  name: string;
+  price: number;
+  discount: number;
+}
+
 export default defineComponent({
   name: "ProductsGalleryComp",
   components: {
     FavoriteIcon,
     ExpandMoreIcon,
+  },
+
+  props: {
+    shoes: {
+      type: Array as () => Shoe[],
+      required: true,
+    },
   },
 });
 </script>
@@ -81,8 +101,9 @@ export default defineComponent({
 }
 
 .products__gallery ul {
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  gap: 2rem 1rem;
 }
 
 .product {
@@ -96,7 +117,7 @@ export default defineComponent({
 .product__image-wrapper {
   position: relative;
 
-  height: 10.75em;
+  width: 100%;
 
   border-radius: 4px;
   overflow: hidden;
@@ -116,11 +137,27 @@ export default defineComponent({
 .product h3 {
   font-size: 1.5em;
   font-weight: 700;
+  text-align: center;
+  line-height: 0.9;
 
   margin-top: 0.4em;
   margin-bottom: 0em;
 }
 .product p {
   font-size: 1em;
+}
+.product p:has(.discounted-price) {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.product p .ordinary-price {
+  text-decoration: line-through;
+  font-size: 0.6em;
+  line-height: 1;
+}
+.product p .discounted-price {
+  font-weight: 600;
+  --color-text: var(--red);
 }
 </style>
