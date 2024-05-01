@@ -201,7 +201,7 @@ export default defineComponent({
   border-radius: 4px;
   overflow: hidden;
 
-  color: var(--color-background);
+  --color-text: var(--color-background);
 }
 .product__image-wrapper img {
   height: 100%;
