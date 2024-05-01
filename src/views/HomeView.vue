@@ -145,7 +145,7 @@ export default defineComponent({
 /* PURSHASE INFO */
 .purshase-info {
   background-color: var(--color-secondary);
-  color: var(--color-background);
+  --color-text: var(--color-background);
 }
 
 .purshase-info ul {
