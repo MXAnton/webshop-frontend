@@ -93,7 +93,7 @@
         <div class="thanks-for-contacting">
           <h2 class="h3-size">Thanks for contacting us!</h2>
           <p class="long">
-            We are very exited to read what you have to say, and will reach back
+            We are very exited to read what you have to say and will reach back
             as soon as possible!
           </p>
           <button class="btn--primary" @click="sentMail = false">
