@@ -189,7 +189,7 @@ section {
 /* OUR MISSION */
 .our-mission {
   background-color: var(--color-secondary);
-  color: var(--color-background);
+  --color-text: var(--color-background);
 }
 .our-mission__content {
   display: grid;
