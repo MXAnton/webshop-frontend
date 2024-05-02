@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <p class="products__amount">8 articles</p>
+      <p class="products__amount">{{ shoes.length }} articles</p>
     </div>
 
     <div class="products__gallery">
