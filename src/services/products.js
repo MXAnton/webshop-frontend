@@ -27,3 +27,17 @@ export async function getProductsFemale() {
 
   return response;
 }
+
+export async function getProduct(_id) {
+  const response = await axiosInstance
+    .get("product/" + _id)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}

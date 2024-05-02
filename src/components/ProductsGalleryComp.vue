@@ -22,21 +22,23 @@
     <div class="products__gallery">
       <ul>
         <li class="product" v-for="shoe in shoes" :key="shoe.id">
-          <div class="product__image-wrapper">
-            <img src="/products/balboa-black-1.jpg" alt="Shoes" />
-            <button>
-              <FavoriteIcon width="32" height="32" />
-            </button>
-          </div>
+          <RouterLink :to="'/product/' + shoe.id">
+            <div class="product__image-wrapper">
+              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
+              <button>
+                <FavoriteIcon width="32" height="32" />
+              </button>
+            </div>
 
-          <h3>{{ shoe.name }}</h3>
-          <p v-if="shoe.discount > 0">
-            <span class="ordinary-price">{{ shoe.price }}</span
-            ><span class="discounted-price euro">{{
-              (shoe.price - shoe.discount).toFixed(2)
-            }}</span>
-          </p>
-          <p v-else class="euro">{{ shoe.price }}</p>
+            <h3>{{ shoe.name }}</h3>
+            <p v-if="shoe.discount > 0">
+              <span class="ordinary-price">{{ shoe.price }}</span
+              ><span class="discounted-price euro">{{
+                (shoe.price - shoe.discount).toFixed(2)
+              }}</span>
+            </p>
+            <p v-else class="euro">{{ shoe.price }}</p>
+          </RouterLink>
         </li>
       </ul>
     </div>
@@ -106,7 +108,7 @@ export default defineComponent({
   gap: 2rem 1rem;
 }
 
-.product {
+.product > a {
   font-size: 1rem;
 
   display: flex;
