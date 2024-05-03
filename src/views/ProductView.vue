@@ -43,7 +43,21 @@
       <p class="price">
         <strong>{{ product.price }}</strong>
       </p>
-      <div class="colors"><p>Colors:</p></div>
+      <div class="colors">
+        <p>Colors:</p>
+        <ul>
+          <li
+            v-for="(color, i) in product.colors"
+            :key="i"
+            :class="{ selected: color.id === $route.params.id }"
+          >
+            <RouterLink
+              :to="'/product/' + color.id"
+              :style="{ 'background-color': color.color }"
+            ></RouterLink>
+          </li>
+        </ul>
+      </div>
     </section>
   </main>
 </template>
@@ -109,6 +123,41 @@ export default defineComponent({
   width: 100%;
   padding: 1rem 4rem;
   margin: 0 auto;
+}
+
+.colors {
+  display: flex;
+  gap: 0.4rem;
+}
+.colors ul {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.colors a {
+  font-size: 1.5rem;
+
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+
+  background-color: black;
+  border: 1px solid var(--white-2);
+
+  position: relative;
+}
+.colors .selected a::after {
+  content: "";
+
+  position: absolute;
+  bottom: -0.25em;
+
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+
+  background-color: var(--white-2);
 }
 
 .selected-image__wrapper img {
