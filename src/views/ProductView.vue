@@ -58,6 +58,20 @@
           </li>
         </ul>
       </div>
+
+      <div class="info__row">
+        <div class="quantity-input">
+          <label for="quantity-input">Quantity:</label>
+          <input type="number" name="quantity-input" id="quantity-input" />
+        </div>
+
+        <div class="size-input">
+          <label for="size-input">Size:</label>
+          <select name="size-input" id="size-input">
+            <option value="42">42</option>
+          </select>
+        </div>
+      </div>
     </section>
   </main>
 </template>
@@ -171,6 +185,11 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.info__row {
+  display: flex;
+  gap: 1rem;
 }
 
 .not-found .section__wrapper > * {
