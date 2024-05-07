@@ -22,12 +22,21 @@
   <main v-else-if="product.product_id != null" class="product">
     <section class="images">
       <div class="selected-image__wrapper">
-        <img src="" alt="Selected image of product" />
+        <img
+          :src="getImageUrl(selectedImage)"
+          alt="Selected image of product"
+        />
       </div>
       <nav>
         <ul>
-          <li v-for="(image, i) in product.images" :key="i">
-            <img src="" alt="Image of product" />
+          <li
+            v-for="(image, i) in product.images.split(',')"
+            :key="i"
+            :class="{ selected: image == selectedImage }"
+          >
+            <button @click="selectedImage = image">
+              <img :src="getImageUrl(image)" alt="Image of product" />
+            </button>
           </li>
         </ul>
       </nav>
@@ -126,6 +135,7 @@ export default defineComponent({
     return {
       product: {} as Product,
       productNotFound: false,
+      selectedImage: "1",
     };
   },
 
@@ -162,6 +172,10 @@ export default defineComponent({
         this.product = { ...res.data.data, colors: prevColors };
       }
     },
+
+    getImageUrl(_image: string) {
+      return "/products/" + this.$route.params.id + "-" + _image + ".jpg";
+    },
   },
 
   created() {
@@ -171,6 +185,31 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.images .selected-image__wrapper {
+  margin-bottom: 1rem;
+}
+.images ul {
+  display: flex;
+  gap: 0.75rem;
+}
+.images li button {
+  height: 5.875rem;
+  border-radius: 3px;
+  border: 3px solid transparent;
+}
+.images li img {
+  height: 100%;
+  border-radius: 2px;
+}
+.images li.selected button {
+  border-color: var(--white-2);
+  background-color: var(--white-2);
+  transition: all 0.3s ease-in-out;
+}
+.images li.selected img {
+  filter: brightness(0.6);
+}
+
 .product {
   display: grid;
   grid-template-columns: 3fr 2fr;
