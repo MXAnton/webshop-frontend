@@ -6,7 +6,7 @@
           <h1 class="logo-font">YOUR SHOES</h1>
           <p>Find your next shoes,<br />or add on to your collection</p>
 
-          <router-link to="/all-shoes" class="btn--primary mt-1"
+          <router-link to="/all-shoes" class="btn--primary mt-2"
             >Browse now</router-link
           >
         </div>
@@ -133,6 +133,7 @@ export default defineComponent({
 
 .hero p {
   font-size: 1.25rem;
+  margin-top: 0.3em;
 }
 
 .hero__img-wrapper {

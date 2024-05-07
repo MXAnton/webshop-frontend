@@ -474,6 +474,9 @@ p.long {
 .mt-1 {
   margin-top: 1rem;
 }
+.mt-2 {
+  margin-top: 1.5rem;
+}
 
 .euro::before {
   content: "€";
