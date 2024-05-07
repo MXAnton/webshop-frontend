@@ -19,7 +19,7 @@
       </div>
     </section>
   </main>
-  <main v-else-if="product != null" class="product">
+  <main v-else-if="product.product_id != null" class="product">
     <section class="images">
       <div class="selected-image__wrapper">
         <img src="" alt="Selected image of product" />
@@ -39,7 +39,7 @@
         Brand: <strong>{{ product.brand }}</strong>
       </p>
       <p class="sex">
-        Sex: <strong>{{ product.sex }}</strong>
+        Sex: <strong>{{ capitalizeFirstLetter(product.sex) }}</strong>
       </p>
       <p class="price">
         <strong>{{ product.price }}</strong>
@@ -95,6 +95,8 @@ import ProductsNavComp from "../components/ProductsNavComp.vue";
 
 import { getProductColor, getProductColors } from "@/services/products";
 
+import { capitalizeFirstLetter } from "@/helpers/index";
+
 interface Product {
   product_id: number;
   name: string;
@@ -128,6 +130,8 @@ export default defineComponent({
   },
 
   methods: {
+    capitalizeFirstLetter,
+
     async loadProduct() {
       this.productNotFound = false;
       const prevProductId = this.product.product_id;
