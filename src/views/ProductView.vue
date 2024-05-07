@@ -1,9 +1,10 @@
 <template>
   <ProductsNavComp
+    v-if="product.product_id != null"
     :navLevelsArray="[
       'Home',
-      'Men',
-      product.sex != null ? product.name : 'Not found',
+      product.sex === 'female' ? 'Women' : 'Men',
+      product.name,
     ]"
   />
 
@@ -49,7 +50,7 @@
           <li
             v-for="(color, i) in product.colors"
             :key="i"
-            :class="{ selected: color.id === $route.params.id }"
+            :class="{ selected: color.id == $route.params.id }"
           >
             <RouterLink
               :to="'/product/' + color.id"
@@ -62,13 +63,24 @@
       <div class="info__row">
         <div class="quantity-input">
           <label for="quantity-input">Quantity:</label>
-          <input type="number" name="quantity-input" id="quantity-input" />
+          <input
+            type="number"
+            name="quantity-input"
+            id="quantity-input"
+            min="0"
+          />
         </div>
 
         <div class="size-input">
           <label for="size-input">Size:</label>
           <select name="size-input" id="size-input">
-            <option value="42">42</option>
+            <option
+              v-for="size in product.sizes"
+              :key="size.size"
+              :value="size.size"
+            >
+              {{ size.size }}
+            </option>
           </select>
         </div>
       </div>
@@ -81,10 +93,10 @@ import { defineComponent } from "vue";
 
 import ProductsNavComp from "../components/ProductsNavComp.vue";
 
-import { getProduct } from "@/services/products";
+import { getProductColor, getProductColors } from "@/services/products";
 
 interface Product {
-  id: number;
+  product_id: number;
   name: string;
   brand: string;
   category: string;
@@ -104,20 +116,41 @@ export default defineComponent({
 
   data() {
     return {
-      product: Object as () => Product,
+      product: {} as Product,
       productNotFound: false,
     };
   },
 
+  watch: {
+    "$route.params.id"() {
+      this.loadProduct();
+    },
+  },
+
   methods: {
     async loadProduct() {
-      const res = await getProduct(this.$route.params.id);
+      this.productNotFound = false;
+      const prevProductId = this.product.product_id;
+      const prevColors = this.product.colors;
+      this.product = {} as Product;
+
+      const res = await getProductColor(this.$route.params.id);
       if (res == null || res.data.length === 0) {
         this.productNotFound = true;
         return;
       }
 
-      this.product = res.data.data;
+      if (prevProductId != res.data.data.product_id) {
+        const colorsRes = await getProductColors(res.data.data.product_id);
+        if (colorsRes == null || colorsRes.data.length === 0) {
+          this.productNotFound = true;
+          return;
+        }
+
+        this.product = { ...res.data.data, colors: colorsRes.data.data };
+      } else {
+        this.product = { ...res.data.data, colors: prevColors };
+      }
     },
   },
 

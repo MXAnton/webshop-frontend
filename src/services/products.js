@@ -28,9 +28,22 @@ export async function getProductsFemale() {
   return response;
 }
 
-export async function getProduct(_id) {
+export async function getProductColor(_id) {
   const response = await axiosInstance
-    .get("product/" + _id)
+    .get("product/color/" + _id)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}
+export async function getProductColors(_id) {
+  const response = await axiosInstance
+    .get("product/" + _id + "/colors")
     .then((res) => {
       return res;
     })
