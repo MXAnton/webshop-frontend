@@ -24,7 +24,10 @@
         <li class="product" v-for="shoe in shoes" :key="shoe.id">
           <RouterLink :to="'/product/' + shoe.id">
             <div class="product__image-wrapper">
-              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
+              <img
+                :src="'/products/' + shoe.id + '-1.jpg'"
+                alt="Image of shoe"
+              />
               <button>
                 <FavoriteIcon width="32" height="32" />
               </button>
