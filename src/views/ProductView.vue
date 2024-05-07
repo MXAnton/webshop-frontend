@@ -41,9 +41,15 @@
       <p class="sex">
         Sex: <strong>{{ capitalizeFirstLetter(product.sex) }}</strong>
       </p>
-      <p class="price">
-        <strong>{{ product.price }}</strong>
+
+      <p v-if="product.discount > 0" class="price">
+        <span class="discounted-price euro">{{
+          (product.price - product.discount).toFixed(2)
+        }}</span>
+        <span class="ordinary-price">{{ product.price }}</span>
       </p>
+      <p v-else class="price euro">{{ product.price }}</p>
+
       <div class="colors">
         <p>Colors:</p>
         <ul>
@@ -174,6 +180,28 @@ export default defineComponent({
   width: 100%;
   padding: 1rem 4rem;
   margin: 0 auto;
+}
+
+.product .price {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.product .price,
+.product .price * {
+  letter-spacing: 0.03em;
+}
+.product p:has(.discounted-price) {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.product p .ordinary-price {
+  text-decoration: line-through;
+  font-size: 0.6em;
+  font-weight: 400;
+}
+.product p .discounted-price {
+  --color-text: var(--red);
 }
 
 .colors {
