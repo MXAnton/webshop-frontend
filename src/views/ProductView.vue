@@ -98,6 +98,16 @@
           </option></Select1Comp
         >
       </div>
+
+      <div class="info__row buy-cta">
+        <button class="btn--secondary btn--square">
+          <FavoriteIcon />
+        </button>
+
+        <button class="btn--primary uppercase">
+          Add to cart <ShoppingBagIcon />
+        </button>
+      </div>
     </section>
   </main>
 </template>
@@ -112,6 +122,8 @@ import { getProductColor, getProductColors } from "@/services/products";
 import { capitalizeFirstLetter } from "@/helpers/index";
 import Select1Comp from "@/components/Select1Comp.vue";
 import NumberInput1Comp from "@/components/NumberInput1Comp.vue";
+import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
+import ShoppingBagIcon from "@/components/icons/ShoppingBagIcon.vue";
 
 interface Product {
   product_id: number;
@@ -132,6 +144,8 @@ export default defineComponent({
     ProductsNavComp,
     Select1Comp,
     NumberInput1Comp,
+    FavoriteIcon,
+    ShoppingBagIcon,
   },
 
   data() {
@@ -294,11 +308,20 @@ export default defineComponent({
   gap: 0.5rem;
 }
 
-.info__row {
+.info__row,
+.buy-cta {
   margin-top: 1rem;
 
   display: flex;
   gap: 1rem;
+}
+
+.buy-cta {
+  --color-text: var(--color-primary);
+  --color-border: var(--color-primary);
+}
+.buy-cta svg {
+  font-size: 1.5em;
 }
 
 .not-found .section__wrapper > * {
