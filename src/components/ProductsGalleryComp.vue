@@ -1,6 +1,6 @@
 <template>
   <div class="products__main-content">
-    <div class="main-content__top">
+    <div class="main-content__top" v-if="withSorting">
       <div class="products__sorting">
         <label for="sort-by">Sort by:</label>
         <div class="select-1">
@@ -72,6 +72,10 @@ export default defineComponent({
     shoes: {
       type: Array as () => Shoe[],
       required: true,
+    },
+    withSorting: {
+      type: Boolean,
+      default: true,
     },
   },
 });

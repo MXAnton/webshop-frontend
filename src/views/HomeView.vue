@@ -58,41 +58,7 @@
       <div class="section__wrapper">
         <h2>BEST SELLERS</h2>
 
-        <ul>
-          <li class="product">
-            <div class="product__image-wrapper">
-              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
-              <button>
-                <FavoriteIcon width="32" height="32" />
-              </button>
-            </div>
-
-            <h3>Balboa</h3>
-            <p>€ 58</p>
-          </li>
-          <li class="product">
-            <div class="product__image-wrapper">
-              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
-              <button>
-                <FavoriteIcon width="32" height="32" />
-              </button>
-            </div>
-
-            <h3>Balboa</h3>
-            <p>€ 58</p>
-          </li>
-          <li class="product">
-            <div class="product__image-wrapper">
-              <img src="/products/balboa-black-1.jpg" alt="Shoes" />
-              <button>
-                <FavoriteIcon width="32" height="32" />
-              </button>
-            </div>
-
-            <h3>Balboa</h3>
-            <p>€ 58</p>
-          </li>
-        </ul>
+        <ProductsGalleryComp :withSorting="false" :shoes="bestSellingShoes" />
       </div>
     </section>
   </main>
@@ -104,7 +70,8 @@ import { defineComponent } from "vue";
 import LocalShippingIcon from "@/components/icons/LocalShippingIcon.vue";
 import UndoIcon from "@/components/icons/UndoIcon.vue";
 import PaymentsIcon from "@/components/icons/PaymentsIcon.vue";
-import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
+import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
+import { getBestSellers } from "@/services/products";
 
 export default defineComponent({
   name: "HomeView",
@@ -112,7 +79,29 @@ export default defineComponent({
     LocalShippingIcon,
     UndoIcon,
     PaymentsIcon,
-    FavoriteIcon,
+    ProductsGalleryComp,
+  },
+
+  data() {
+    return {
+      bestSellingShoes: [],
+    };
+  },
+
+  methods: {
+    async loadBestSellingShoes() {
+      const res = await getBestSellers(4);
+      if (res == null) {
+        this.bestSellingShoes = [];
+        return;
+      }
+
+      this.bestSellingShoes = res.data.data;
+    },
+  },
+
+  created() {
+    this.loadBestSellingShoes();
   },
 });
 </script>

@@ -54,3 +54,17 @@ export async function getProductColors(_id) {
 
   return response;
 }
+
+export async function getBestSellers(_amount) {
+  const response = await axiosInstance
+    .get("products/best-sellers/" + _amount)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}
