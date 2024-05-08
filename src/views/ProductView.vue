@@ -76,15 +76,23 @@
       </div>
 
       <div class="info__row">
-        <div class="quantity-input">
+        <!-- <div class="quantity-input">
           <label for="quantity-input">Quantity:</label>
-          <input
-            type="number"
-            name="quantity-input"
-            id="quantity-input"
-            min="0"
-          />
-        </div>
+          <div>
+            <input
+              type="number"
+              name="quantity-input"
+              id="quantity-input"
+              min="0"
+            />
+            <button></button>
+          </div>
+        </div> -->
+        <NumberInput1Comp
+          :id="'quantity-input'"
+          :label="'Quantity'"
+          :maxValue="product.sizes[0].quantity"
+        ></NumberInput1Comp>
 
         <Select1Comp :id="'size-input'" :label="'Size'" :column="true">
           <option
@@ -109,6 +117,7 @@ import { getProductColor, getProductColors } from "@/services/products";
 
 import { capitalizeFirstLetter } from "@/helpers/index";
 import Select1Comp from "@/components/Select1Comp.vue";
+import NumberInput1Comp from "@/components/NumberInput1Comp.vue";
 
 interface Product {
   product_id: number;
@@ -128,6 +137,7 @@ export default defineComponent({
   components: {
     ProductsNavComp,
     Select1Comp,
+    NumberInput1Comp,
   },
 
   data() {
