@@ -1,5 +1,5 @@
 <template>
-  <div class="select-1" :class="{ column: column }">
+  <div class="select-1" :class="{ column: column, 'fill-height': fillHeight }">
     <label v-if="label != null" :for="id">{{ label }}:</label>
     <div>
       <select :name="id" :id="id">
@@ -28,6 +28,7 @@ export default defineComponent({
     },
     label: String,
     column: Boolean,
+    fillHeight: Boolean,
   },
 });
 </script>
@@ -56,6 +57,9 @@ export default defineComponent({
 
   min-width: max-content;
 }
+.select-1.fill-height > div {
+  height: 100%;
+}
 .select-1 select {
   width: 100%;
   font-family: inherit;
@@ -76,6 +80,9 @@ export default defineComponent({
   border: 1px solid var(--color-secondary);
   border-radius: 3px;
   background: none;
+}
+.select-1.fill-height select {
+  height: 100%;
 }
 .select-1 select::-ms-expand {
   display: none;

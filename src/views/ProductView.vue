@@ -76,25 +76,19 @@
       </div>
 
       <div class="info__row">
-        <!-- <div class="quantity-input">
-          <label for="quantity-input">Quantity:</label>
-          <div>
-            <input
-              type="number"
-              name="quantity-input"
-              id="quantity-input"
-              min="0"
-            />
-            <button></button>
-          </div>
-        </div> -->
         <NumberInput1Comp
           :id="'quantity-input'"
           :label="'Quantity'"
           :maxValue="product.sizes[0].quantity"
         ></NumberInput1Comp>
 
-        <Select1Comp :id="'size-input'" :label="'Size'" :column="true">
+        <Select1Comp
+          class="size-input"
+          :id="'size-input'"
+          :label="'Size'"
+          :column="true"
+          :fillHeight="true"
+        >
           <option
             v-for="size in product.sizes"
             :key="size.size"
@@ -301,6 +295,8 @@ export default defineComponent({
 }
 
 .info__row {
+  margin-top: 1rem;
+
   display: flex;
   gap: 1rem;
 }
