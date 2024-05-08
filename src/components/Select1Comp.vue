@@ -52,7 +52,7 @@ export default defineComponent({
 
 .select-1 > div {
   position: relative;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--color-text);
 
   min-width: max-content;
