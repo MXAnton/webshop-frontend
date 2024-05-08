@@ -92,7 +92,7 @@ input[type="number"] {
   border-radius: 3px;
 
   display: grid;
-  grid-template-columns: 4em auto;
+  grid-template-columns: 3em auto;
 }
 .number-1 > div:has(input:focus) {
   border-color: var(--yellow);
