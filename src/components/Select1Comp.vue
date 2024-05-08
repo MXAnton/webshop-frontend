@@ -1,5 +1,5 @@
 <template>
-  <div class="select-1">
+  <div class="select-1" :class="{ column: column }">
     <label v-if="label != null" :for="id">{{ label }}:</label>
     <div>
       <select :name="id" :id="id">
@@ -27,6 +27,7 @@ export default defineComponent({
       required: true,
     },
     label: String,
+    column: Boolean,
   },
 });
 </script>
@@ -36,11 +37,16 @@ export default defineComponent({
 .select-1 {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+}
+.select-1.column {
+  flex-direction: column;
+  align-items: start;
+  gap: 0rem;
 }
 .select-1 label {
   font-weight: 300;
   font-size: 0.875rem;
-  margin-right: 0.75rem;
 }
 
 .select-1 > div {
@@ -48,7 +54,7 @@ export default defineComponent({
   font-size: 0.875rem;
   color: var(--color-text);
 
-  min-width: 10em;
+  min-width: max-content;
 }
 .select-1 select {
   width: 100%;
@@ -62,8 +68,9 @@ export default defineComponent({
 
   cursor: pointer;
 
-  padding: 0.4em 0.5em;
+  padding: 0.4em 1.8em 0.4em 0.5em;
   font-size: 1em;
+  font-weight: 600;
 
   color: inherit;
   border: 1px solid var(--color-secondary);

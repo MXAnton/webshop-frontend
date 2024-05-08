@@ -86,18 +86,15 @@
           />
         </div>
 
-        <div class="size-input">
-          <label for="size-input">Size:</label>
-          <select name="size-input" id="size-input">
-            <option
-              v-for="size in product.sizes"
-              :key="size.size"
-              :value="size.size"
-            >
-              {{ size.size }}
-            </option>
-          </select>
-        </div>
+        <Select1Comp :id="'size-input'" :label="'Size'" :column="true">
+          <option
+            v-for="size in product.sizes"
+            :key="size.size"
+            :value="size.size"
+          >
+            EU {{ size.size }}
+          </option></Select1Comp
+        >
       </div>
     </section>
   </main>
@@ -111,6 +108,7 @@ import ProductsNavComp from "../components/ProductsNavComp.vue";
 import { getProductColor, getProductColors } from "@/services/products";
 
 import { capitalizeFirstLetter } from "@/helpers/index";
+import Select1Comp from "@/components/Select1Comp.vue";
 
 interface Product {
   product_id: number;
@@ -129,6 +127,7 @@ export default defineComponent({
   name: "MenShoesView",
   components: {
     ProductsNavComp,
+    Select1Comp,
   },
 
   data() {
