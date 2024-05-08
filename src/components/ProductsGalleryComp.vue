@@ -1,7 +1,7 @@
 <template>
   <div class="products__main-content">
     <div class="main-content__top" v-if="withSorting">
-      <div class="products__sorting">
+      <!-- <div class="products__sorting">
         <label for="sort-by">Sort by:</label>
         <div class="select-1">
           <select name="sort-by" id="sort-by">
@@ -14,7 +14,14 @@
 
           <ExpandMoreIcon width="24" height="24" />
         </div>
-      </div>
+      </div> -->
+      <Select1Comp :id="'sort-by'" :label="'Sort by'">
+        <option value="relevance">Relevance</option>
+        <option value="lowest-price">Lowest Price</option>
+        <option value="highest-price">Highest Price</option>
+        <option value="a-z">A-Z</option>
+        <option value="z-a">Z-A</option></Select1Comp
+      >
 
       <p class="products__amount">{{ shoes.length }} articles</p>
     </div>
@@ -52,7 +59,7 @@
 import { defineComponent } from "vue";
 
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
-import ExpandMoreIcon from "@/components/icons/ExpandMoreIcon.vue";
+import Select1Comp from "./Select1Comp.vue";
 
 interface Shoe {
   id: number;
@@ -65,7 +72,7 @@ export default defineComponent({
   name: "ProductsGalleryComp",
   components: {
     FavoriteIcon,
-    ExpandMoreIcon,
+    Select1Comp,
   },
 
   props: {
@@ -92,16 +99,6 @@ export default defineComponent({
   align-items: center;
 
   margin-bottom: 4rem;
-}
-
-.products__sorting {
-  display: flex;
-  align-items: center;
-}
-.products__sorting label {
-  font-weight: 300;
-  font-size: 0.875rem;
-  margin-right: 0.75rem;
 }
 
 .products__amount {
