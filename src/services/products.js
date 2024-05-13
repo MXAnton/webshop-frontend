@@ -1,5 +1,6 @@
 import axiosInstance from "./index";
 
+/*
 export async function getProductsMale() {
   const response = await axiosInstance
     .get("products/male")
@@ -17,6 +18,21 @@ export async function getProductsMale() {
 export async function getProductsFemale() {
   const response = await axiosInstance
     .get("products/female")
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}
+*/
+
+export async function getProducts(_sex, _categories) {
+  const response = await axiosInstance
+    .get(`products/${_sex}/${_categories}`)
     .then((res) => {
       return res;
     })

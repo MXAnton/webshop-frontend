@@ -22,29 +22,20 @@
             <li>
               <Dropdown2Comp header="CATEGORIES">
                 <div class="dropdown__options-wrapper">
-                  <div class="dropdown__option-box">
+                  <div
+                    class="dropdown__option-box"
+                    v-for="(category, i) in categories"
+                    :key="i"
+                  >
                     <input
                       type="checkbox"
-                      name="categories-slippers"
-                      id="categories-slippers"
+                      :name="'categories-' + category"
+                      :id="'categories-' + category"
+                      @change="categoryChange(category)"
                     />
-                    <label for="categories-slippers">Slippers</label>
-                  </div>
-                  <div class="dropdown__option-box">
-                    <input
-                      type="checkbox"
-                      name="categories-dress-shoes"
-                      id="categories-dress-shoes"
-                    />
-                    <label for="categories-dress-shoes">Dress shoes</label>
-                  </div>
-                  <div class="dropdown__option-box">
-                    <input
-                      type="checkbox"
-                      name="categories-sneakers"
-                      id="categories-sneakers"
-                    />
-                    <label for="categories-sneakers">Sneakers</label>
+                    <label :for="'categories-' + category">{{
+                      category
+                    }}</label>
                   </div>
                 </div>
               </Dropdown2Comp>
@@ -182,7 +173,7 @@ import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
 import Dropdown2Comp from "@/components/Dropdown2Comp.vue";
 import SliderDoubleComp from "@/components/SliderDoubleComp.vue";
 
-import { getProductsMale, getProductsFemale } from "@/services/products";
+import { getProducts } from "@/services/products";
 
 export default defineComponent({
   name: "ProductsView",
@@ -196,6 +187,8 @@ export default defineComponent({
   data() {
     return {
       shoes: [],
+      categories: ["Slippers", "Dress shoes", "Sneakers"],
+      selectedCategories: [] as string[],
     };
   },
 
@@ -211,14 +204,26 @@ export default defineComponent({
 
       const res =
         this.$route.params.sex == "women"
-          ? await getProductsFemale()
-          : await getProductsMale();
+          ? await getProducts("female", this.selectedCategories)
+          : await getProducts("male", this.selectedCategories);
       if (res == null) {
         this.shoes = [];
         return;
       }
 
       this.shoes = res.data.data;
+    },
+    categoryChange(_category: string) {
+      const index = this.selectedCategories.indexOf(_category);
+      if (index !== -1) {
+        // String exists, remove it
+        this.selectedCategories.splice(index, 1);
+      } else {
+        // String doesn't exist, push it
+        this.selectedCategories.push(_category);
+      }
+
+      this.loadShoes();
     },
   },
 
