@@ -10,22 +10,16 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   {
-    path: "/all-shoes",
-    name: "allShoes",
+    path: "/select-sex",
+    name: "selectSex",
     component: () =>
-      import(/* webpackChunkName: "allShoes" */ "../views/AllShoesView.vue"),
+      import(/* webpackChunkName: "selectSex" */ "../views/SelectSexView.vue"),
   },
   {
-    path: "/men",
-    name: "men",
+    path: "/products/:sex",
+    name: "products",
     component: () =>
-      import(/* webpackChunkName: "men" */ "../views/MenShoesView.vue"),
-  },
-  {
-    path: "/women",
-    name: "women",
-    component: () =>
-      import(/* webpackChunkName: "women" */ "../views/WomenShoesView.vue"),
+      import(/* webpackChunkName: "products" */ "../views/ProductsView.vue"),
   },
   {
     path: "/product/:id",

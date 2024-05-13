@@ -14,7 +14,7 @@
 
         <li>
           <div class="dropdown-1">
-            <router-link class="btn" to="/men">
+            <router-link class="btn" to="/products/men">
               <span>MEN</span>
               <ExpandMoreIcon
             /></router-link>
@@ -22,19 +22,28 @@
             <ul class="dropdown__content">
               <li>
                 <router-link
-                  :to="{ path: 'men', params: { category: 'sneakers' } }"
+                  :to="{
+                    path: '/products/men',
+                    params: { category: 'sneakers' },
+                  }"
                   >Sneakers</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="{ path: 'men', params: { category: 'dress shoes' } }"
+                  :to="{
+                    path: '/products/men',
+                    params: { category: 'dress shoes' },
+                  }"
                   >Dress shoes</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="{ path: 'men', params: { category: 'slippers' } }"
+                  :to="{
+                    path: '/products/men',
+                    params: { category: 'slippers' },
+                  }"
                   >Slippers</router-link
                 >
               </li>
@@ -43,7 +52,7 @@
         </li>
         <li>
           <div class="dropdown-1">
-            <router-link class="btn" to="/women">
+            <router-link class="btn" to="/products/women">
               <span>WOMEN</span>
               <ExpandMoreIcon
             /></router-link>
@@ -51,19 +60,28 @@
             <ul class="dropdown__content">
               <li>
                 <router-link
-                  :to="{ path: 'women', params: { category: 'boots' } }"
+                  :to="{
+                    path: '/products/women',
+                    params: { category: 'boots' },
+                  }"
                   >Boots</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="{ path: 'women', params: { category: 'loafers' } }"
+                  :to="{
+                    path: '/products/women',
+                    params: { category: 'loafers' },
+                  }"
                   >Loafers</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="{ path: 'women', params: { category: 'flips' } }"
+                  :to="{
+                    path: '/products/women',
+                    params: { category: 'flips' },
+                  }"
                   >Flips</router-link
                 >
               </li>

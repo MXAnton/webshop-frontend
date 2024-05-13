@@ -5,8 +5,10 @@
         <h1 class="h2-size">FIND YOUR SHOES</h1>
 
         <div class="select-gender__buttons">
-          <router-link to="/men" class="btn--primary">Men</router-link>
-          <router-link to="/women" class="btn--primary">Women</router-link>
+          <router-link to="/products/men" class="btn--primary">Men</router-link>
+          <router-link to="/products/women" class="btn--primary"
+            >Women</router-link
+          >
         </div>
       </div>
     </section>
@@ -17,7 +19,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "AllShoesView",
+  name: "SelectSexView",
 });
 </script>
 

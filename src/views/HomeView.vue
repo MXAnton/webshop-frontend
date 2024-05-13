@@ -6,7 +6,7 @@
           <h1 class="logo-font">YOUR SHOES</h1>
           <p>Find your next shoes,<br />or add on to your collection</p>
 
-          <router-link to="/all-shoes" class="btn--primary mt-2"
+          <router-link to="/select-sex" class="btn--primary mt-2"
             >Browse now</router-link
           >
         </div>

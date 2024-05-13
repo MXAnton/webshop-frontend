@@ -1,10 +1,15 @@
 <template>
   <main>
-    <ProductsNavComp :navLevelsArray="['Home', 'Women']" />
+    <ProductsNavComp
+      :navLevelsArray="[
+        'Home',
+        $route.params.sex === 'women' ? 'Women' : 'Men',
+      ]"
+    />
 
     <section class="hero">
       <div class="section__wrapper">
-        <h1 class="h2-size">ALL WOMEN SHOES</h1>
+        <h1 class="h2-size uppercase">All {{ $route.params.sex }} shoes</h1>
       </div>
     </section>
 
@@ -25,10 +30,10 @@ import ProductsNavComp from "../components/ProductsNavComp.vue";
 import ProductsFiltersComp from "@/components/ProductsFiltersComp.vue";
 import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
 
-import { getProductsFemale } from "@/services/products";
+import { getProductsMale, getProductsFemale } from "@/services/products";
 
 export default defineComponent({
-  name: "WomenShoesView",
+  name: "MenShoesView",
   components: {
     ProductsNavComp,
     ProductsFiltersComp,
@@ -41,9 +46,20 @@ export default defineComponent({
     };
   },
 
+  watch: {
+    "$route.params.sex": function () {
+      this.loadShoes();
+    },
+  },
+
   methods: {
     async loadShoes() {
-      const res = await getProductsFemale();
+      this.shoes = [];
+
+      const res =
+        this.$route.params.sex == "women"
+          ? await getProductsFemale()
+          : await getProductsMale();
       if (res == null) {
         this.shoes = [];
         return;
