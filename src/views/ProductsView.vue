@@ -3,13 +3,15 @@
     <ProductsNavComp
       :navLevelsArray="[
         'Home',
-        $route.params.sex === 'women' ? 'Women' : 'Men',
+        $route.name === 'productsWomen' ? 'Women' : 'Men',
       ]"
     />
 
     <section class="hero">
       <div class="section__wrapper">
-        <h1 class="h2-size uppercase">All {{ $route.params.sex }} shoes</h1>
+        <h1 class="h2-size uppercase">
+          All {{ $route.name === "productsMen" ? "men" : "women" }} shoes
+        </h1>
       </div>
     </section>
 
@@ -196,7 +198,7 @@ export default defineComponent({
   },
 
   watch: {
-    "$route.params.sex": function () {
+    "$route.name": function () {
       this.initializeView();
     },
   },
@@ -206,7 +208,7 @@ export default defineComponent({
       this.initialLoading = true;
       this.selectedCategories = [];
 
-      if (this.$route.params.sex === "men") {
+      if (this.$route.name === "productsMen") {
         this.categories = store.getters.getMaleCategories;
       } else {
         this.categories = store.getters.getFemaleCategories;
@@ -219,7 +221,7 @@ export default defineComponent({
       this.shoes = [];
 
       const res =
-        this.$route.params.sex == "women"
+        this.$route.name == "productsWomen"
           ? await getProducts("female", this.selectedCategories)
           : await getProducts("male", this.selectedCategories);
       if (res == null) {
