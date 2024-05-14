@@ -3,9 +3,9 @@
     <div class="section__wrapper">
       <span v-for="(navLevel, i) in navLevelsArray" :key="i">
         <router-link
-          :to="'/' + (navLevel as string).toLowerCase()"
+          :to="navLevel.path"
           :class="{ current: i == navLevelsArray.length - 1 }"
-          >{{ navLevel }}</router-link
+          >{{ navLevel.name }}</router-link
         >
         <span v-if="i < navLevelsArray.length - 1"> /</span>
       </span>
@@ -16,13 +16,18 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+interface NavLevel {
+  name: string;
+  path: string;
+}
+
 export default defineComponent({
   name: "ProductsNavComp",
   props: {
     navLevelsArray: {
-      type: Array,
+      type: Array as () => NavLevel[],
       default: () => {
-        return ["Home"];
+        return [{ name: "Home", path: "/" }];
       },
     },
   },

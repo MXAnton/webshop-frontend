@@ -2,8 +2,11 @@
   <main>
     <ProductsNavComp
       :navLevelsArray="[
-        'Home',
-        $route.name === 'productsWomen' ? 'Women' : 'Men',
+        { name: 'Home', path: '/' },
+        {
+          name: $route.name === 'productsWomen' ? 'Women' : 'Men',
+          path: $route.path,
+        },
       ]"
     />
 

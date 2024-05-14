@@ -2,9 +2,12 @@
   <ProductsNavComp
     v-if="product.product_id != null"
     :navLevelsArray="[
-      'Home',
-      product.sex === 'female' ? 'Women' : 'Men',
-      product.name,
+      { name: 'Home', path: '/' },
+      {
+        name: product.sex === 'female' ? 'Women' : 'Men',
+        path: product.sex === 'female' ? '/products/women' : '/products/men',
+      },
+      { name: product.name, path: $route.path },
     ]"
   />
 
