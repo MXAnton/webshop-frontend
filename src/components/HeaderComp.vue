@@ -23,8 +23,8 @@
               <li v-for="maleCategory in getMaleCategories" :key="maleCategory">
                 <router-link
                   :to="{
-                    path: '/products/men',
-                    params: { category: maleCategory },
+                    name: 'productsMen',
+                    query: { categories: maleCategory },
                   }"
                   >{{ maleCategory }}</router-link
                 >
@@ -46,8 +46,8 @@
               >
                 <router-link
                   :to="{
-                    path: '/products/women',
-                    params: { category: femaleCategory },
+                    name: 'productsWomen',
+                    query: { categories: femaleCategory },
                   }"
                   >{{ femaleCategory }}</router-link
                 >
