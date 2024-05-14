@@ -7,6 +7,13 @@
         name: product.sex === 'female' ? 'Women' : 'Men',
         path: product.sex === 'female' ? '/products/women' : '/products/men',
       },
+      {
+        name: product.category,
+        path:
+          product.sex === 'female'
+            ? '/products/women?categories=' + product.category
+            : '/products/men?categories=' + product.category,
+      },
       { name: product.name, path: $route.path },
     ]"
   />
@@ -68,7 +75,7 @@
           <li
             v-for="(color, i) in product.colors"
             :key="i"
-            :class="{ selected: color.id == $route.params.id }"
+            :class="{ selected: color.id.toString() == $route.params.id }"
           >
             <RouterLink
               :to="'/product/' + color.id"
@@ -82,7 +89,7 @@
         <NumberInput1Comp
           :id="'quantity-input'"
           :label="'Quantity'"
-          :maxValue="product.sizes[0].quantity"
+          :maxValue="product.sizes.length > 0 ? product.sizes[0].quantity : 0"
         ></NumberInput1Comp>
 
         <Select1Comp
@@ -137,8 +144,17 @@ interface Product {
   price: number;
   discount: number;
   color: string;
-  colors: [];
-  sizes: [];
+  colors: Color[];
+  sizes: Size[];
+  images: string;
+}
+interface Color {
+  id: number;
+  color: string;
+}
+interface Size {
+  size: string;
+  quantity: number;
 }
 
 export default defineComponent({
