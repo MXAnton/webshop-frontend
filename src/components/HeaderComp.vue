@@ -20,31 +20,13 @@
             /></router-link>
 
             <ul class="dropdown__content">
-              <li>
+              <li v-for="maleCategory in getMaleCategories" :key="maleCategory">
                 <router-link
                   :to="{
                     path: '/products/men',
-                    params: { category: 'sneakers' },
+                    params: { category: maleCategory },
                   }"
-                  >Sneakers</router-link
-                >
-              </li>
-              <li>
-                <router-link
-                  :to="{
-                    path: '/products/men',
-                    params: { category: 'dress shoes' },
-                  }"
-                  >Dress shoes</router-link
-                >
-              </li>
-              <li>
-                <router-link
-                  :to="{
-                    path: '/products/men',
-                    params: { category: 'slippers' },
-                  }"
-                  >Slippers</router-link
+                  >{{ maleCategory }}</router-link
                 >
               </li>
             </ul>
@@ -58,31 +40,16 @@
             /></router-link>
 
             <ul class="dropdown__content">
-              <li>
+              <li
+                v-for="femaleCategory in getFemaleCategories"
+                :key="femaleCategory"
+              >
                 <router-link
                   :to="{
                     path: '/products/women',
-                    params: { category: 'boots' },
+                    params: { category: femaleCategory },
                   }"
-                  >Boots</router-link
-                >
-              </li>
-              <li>
-                <router-link
-                  :to="{
-                    path: '/products/women',
-                    params: { category: 'loafers' },
-                  }"
-                  >Loafers</router-link
-                >
-              </li>
-              <li>
-                <router-link
-                  :to="{
-                    path: '/products/women',
-                    params: { category: 'flips' },
-                  }"
-                  >Flips</router-link
+                  >{{ femaleCategory }}</router-link
                 >
               </li>
             </ul>
@@ -141,6 +108,7 @@ import SearchIcon from "@/components/icons/SearchIcon.vue";
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
 import ShoppingBagIcon from "@/components/icons/ShoppingBagIcon.vue";
 import AccountCircleIcon from "@/components/icons/AccountCircleIcon.vue";
+import store from "@/store";
 
 export default defineComponent({
   name: "HeaderComp",
@@ -150,6 +118,15 @@ export default defineComponent({
     FavoriteIcon,
     ShoppingBagIcon,
     AccountCircleIcon,
+  },
+
+  computed: {
+    getMaleCategories() {
+      return store.getters.getMaleCategories;
+    },
+    getFemaleCategories() {
+      return store.getters.getFemaleCategories;
+    },
   },
 });
 </script>
