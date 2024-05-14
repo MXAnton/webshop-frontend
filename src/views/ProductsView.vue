@@ -202,6 +202,10 @@ export default defineComponent({
     "$route.name": function () {
       this.initializeView();
     },
+    "$route.query": function () {
+      this.loadCategories();
+      this.loadShoes();
+    },
   },
 
   methods: {
