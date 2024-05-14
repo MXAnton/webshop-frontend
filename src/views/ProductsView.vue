@@ -18,7 +18,7 @@
         <div class="products__filters">
           <h2 class="h3-size">FILTERS</h2>
 
-          <ul class="filters__list">
+          <ul class="filters__list" v-if="initialLoading === false">
             <li>
               <Dropdown2Comp header="CATEGORIES">
                 <div class="dropdown__options-wrapper">
@@ -174,6 +174,7 @@ import Dropdown2Comp from "@/components/Dropdown2Comp.vue";
 import SliderDoubleComp from "@/components/SliderDoubleComp.vue";
 
 import { getProducts } from "@/services/products";
+import store from "@/store";
 
 export default defineComponent({
   name: "ProductsView",
@@ -187,18 +188,33 @@ export default defineComponent({
   data() {
     return {
       shoes: [],
-      categories: ["Slippers", "Dress shoes", "Sneakers"],
+      categories: [],
       selectedCategories: [] as string[],
+
+      initialLoading: true,
     };
   },
 
   watch: {
     "$route.params.sex": function () {
-      this.loadShoes();
+      this.initializeView();
     },
   },
 
   methods: {
+    initializeView() {
+      this.initialLoading = true;
+      this.selectedCategories = [];
+
+      if (this.$route.params.sex === "men") {
+        this.categories = store.getters.getMaleCategories;
+      } else {
+        this.categories = store.getters.getFemaleCategories;
+      }
+
+      this.loadShoes();
+    },
+
     async loadShoes() {
       this.shoes = [];
 
@@ -212,6 +228,8 @@ export default defineComponent({
       }
 
       this.shoes = res.data.data;
+
+      this.initialLoading = false;
     },
     categoryChange(_category: string) {
       const index = this.selectedCategories.indexOf(_category);
@@ -228,7 +246,7 @@ export default defineComponent({
   },
 
   created() {
-    this.loadShoes();
+    this.initializeView();
   },
 });
 </script>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import store from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -69,6 +70,17 @@ const router = createRouter({
       return { top: 0 };
     }
   },
+});
+
+router.beforeEach(async (to, from, next) => {
+  if (
+    store.getters.getMaleCategories.length === 0 ||
+    store.getters.getFemaleCategories.length === 0
+  ) {
+    await store.dispatch("fetchCategories");
+  }
+
+  next();
 });
 
 export default router;

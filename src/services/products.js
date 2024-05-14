@@ -30,6 +30,20 @@ export async function getProductsFemale() {
 }
 */
 
+export async function getProductsCategories() {
+  const response = await axiosInstance
+    .get("products/categories")
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}
+
 export async function getProducts(_sex, _categories) {
   const response = await axiosInstance
     .get(`products/${_sex}/${_categories}`)
