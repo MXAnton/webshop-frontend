@@ -34,6 +34,7 @@
                       :name="'categories-' + category"
                       :id="'categories-' + category"
                       @change="categoryChange(category)"
+                      :checked="selectedCategories.indexOf(category) !== -1"
                     />
                     <label :for="'categories-' + category">{{
                       category
@@ -206,15 +207,21 @@ export default defineComponent({
   methods: {
     initializeView() {
       this.initialLoading = true;
-      this.selectedCategories = [];
+
+      this.loadCategories();
+
+      this.loadShoes();
+    },
+
+    loadCategories() {
+      this.selectedCategories =
+        this.$route.query.categories?.toString().split(",") || [];
 
       if (this.$route.name === "productsMen") {
         this.categories = store.getters.getMaleCategories;
       } else {
         this.categories = store.getters.getFemaleCategories;
       }
-
-      this.loadShoes();
     },
 
     async loadShoes() {
@@ -241,6 +248,24 @@ export default defineComponent({
       } else {
         // String doesn't exist, push it
         this.selectedCategories.push(_category);
+      }
+
+      // Check if selectedCategories is not empty
+      if (this.selectedCategories.length > 0) {
+        // If not empty, add or update the 'categories' query parameter
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            categories: this.selectedCategories.join(","),
+          },
+        });
+      } else {
+        // If empty, remove the 'categories' query parameter
+        // const { categories, ...queryWithoutCategories } = this.$route.query;
+        const queryWithoutCategories = Object.assign({}, this.$route.query);
+        delete queryWithoutCategories.categories;
+
+        this.$router.push({ query: queryWithoutCategories });
       }
 
       this.loadShoes();
