@@ -90,7 +90,7 @@ export default defineComponent({
 
   methods: {
     async loadBestSellingShoes() {
-      const res = await getBestSellers(4);
+      const res = await getBestSellers(3);
       if (res == null) {
         this.bestSellingShoes = [];
         return;

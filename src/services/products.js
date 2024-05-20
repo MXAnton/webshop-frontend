@@ -87,7 +87,7 @@ export async function getProductColors(_id) {
 
 export async function getBestSellers(_amount) {
   const response = await axiosInstance
-    .get("products/best-sellers/" + _amount)
+    .get("best-sellers/" + _amount)
     .then((res) => {
       return res;
     })
