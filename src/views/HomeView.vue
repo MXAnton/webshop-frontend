@@ -110,7 +110,7 @@ export default defineComponent({
 /* HERO */
 .hero {
   width: 100%;
-  min-height: 80vh;
+  /* min-height: 80vh; */
 }
 
 .hero .section__wrapper {
