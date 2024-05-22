@@ -1,4 +1,5 @@
 import axiosInstance from "./index";
+import qs from "qs";
 
 /*
 export async function getProductsMale() {
@@ -46,7 +47,14 @@ export async function getProductsCategories() {
 
 export async function getProducts(_sex, _categories) {
   const response = await axiosInstance
-    .get(`products/${_sex}/${_categories}`)
+    .get(`products/sex/${_sex}`, {
+      params: {
+        categories: _categories,
+      },
+      paramsSerializer: (params) => {
+        return qs.stringify(params, { arrayFormat: "brackets" });
+      },
+    })
     .then((res) => {
       return res;
     })
