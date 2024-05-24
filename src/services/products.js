@@ -1,36 +1,6 @@
 import axiosInstance from "./index";
 import qs from "qs";
 
-/*
-export async function getProductsMale() {
-  const response = await axiosInstance
-    .get("products/male")
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.warn(err);
-      return null;
-    });
-
-  return response;
-}
-
-export async function getProductsFemale() {
-  const response = await axiosInstance
-    .get("products/female")
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.warn(err);
-      return null;
-    });
-
-  return response;
-}
-*/
-
 export async function getProductsCategories() {
   const response = await axiosInstance
     .get("products/categories")
