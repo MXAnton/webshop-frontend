@@ -72,7 +72,7 @@ const router = createRouter({
       };
     } else if (savedPosition) {
       return savedPosition;
-    } else {
+    } else if (to.name != from.name) {
       return { top: 0 };
     }
   },
