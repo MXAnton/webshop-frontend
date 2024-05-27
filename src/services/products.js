@@ -15,6 +15,20 @@ export async function getProductsCategories() {
   return response;
 }
 
+export async function getProductsFiltersBySex(_sex) {
+  const response = await axiosInstance
+    .get(`products/sex/${_sex}/filters`)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}
+
 export async function getProducts(
   _sex,
   _categories,

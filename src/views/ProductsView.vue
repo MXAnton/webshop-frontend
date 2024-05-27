@@ -49,29 +49,19 @@
             <li>
               <Dropdown2Comp header="BRAND">
                 <div class="dropdown__options-wrapper">
-                  <div class="dropdown__option-box">
+                  <div
+                    class="dropdown__option-box"
+                    v-for="(brand, i) in brands"
+                    :key="i"
+                  >
                     <input
                       type="checkbox"
-                      name="brand-sneakers"
-                      id="brand-sneakers"
+                      :name="'brand-' + brand"
+                      :id="'brand-' + brand"
+                      @change="brandChange(brand)"
+                      :checked="selectedBrands.indexOf(brand) !== -1"
                     />
-                    <label for="brand-sneakers">Sneakers</label>
-                  </div>
-                  <div class="dropdown__option-box">
-                    <input
-                      type="checkbox"
-                      name="brand-stepside"
-                      id="brand-stepside"
-                    />
-                    <label for="brand-stepside">Stepside</label>
-                  </div>
-                  <div class="dropdown__option-box">
-                    <input
-                      type="checkbox"
-                      name="brand-lejon"
-                      id="brand-lejon"
-                    />
-                    <label for="brand-lejon">Lejon</label>
+                    <label :for="'brand-' + brand">{{ brand }}</label>
                   </div>
                 </div>
               </Dropdown2Comp>
@@ -194,8 +184,12 @@ export default defineComponent({
   data() {
     return {
       shoes: [],
+
       categories: [],
       selectedCategories: [] as string[],
+
+      brands: [],
+      selectedBrands: [] as string[],
 
       initialLoading: true,
     };
@@ -217,6 +211,8 @@ export default defineComponent({
 
       this.loadCategories();
 
+      this.loadFilters();
+
       this.loadShoes();
     },
 
@@ -231,13 +227,45 @@ export default defineComponent({
       }
     },
 
+    async loadFilters() {
+      this.selectedBrands = [];
+
+      let filters;
+
+      if (this.$route.name === "productsMen") {
+        if (store.getters.getMaleFilters == null) {
+          await store.dispatch("fetchMaleFilters");
+        }
+
+        filters = store.getters.getMaleFilters;
+      } else {
+        if (store.getters.getFemaleFilters == null) {
+          await store.dispatch("fetchFemaleFilters");
+        }
+
+        filters = store.getters.getFemaleFilters;
+      }
+
+      this.brands = filters.brands;
+
+      console.log(filters);
+    },
+
     async loadShoes() {
       this.shoes = [];
 
       const res =
         this.$route.name == "productsWomen"
-          ? await getProducts("female", this.selectedCategories)
-          : await getProducts("male", this.selectedCategories);
+          ? await getProducts(
+              "female",
+              this.selectedCategories,
+              this.selectedBrands
+            )
+          : await getProducts(
+              "male",
+              this.selectedCategories,
+              this.selectedBrands
+            );
       if (res == null) {
         this.shoes = [];
         return;
@@ -247,6 +275,7 @@ export default defineComponent({
 
       this.initialLoading = false;
     },
+
     categoryChange(_category: string) {
       const index = this.selectedCategories.indexOf(_category);
       if (index !== -1) {
@@ -273,6 +302,37 @@ export default defineComponent({
         delete queryWithoutCategories.categories;
 
         this.$router.push({ query: queryWithoutCategories });
+      }
+
+      this.loadShoes();
+    },
+
+    brandChange(_brand: string) {
+      const index = this.selectedBrands.indexOf(_brand);
+      if (index !== -1) {
+        // String exists, remove it
+        this.selectedBrands.splice(index, 1);
+      } else {
+        // String doesn't exist, push it
+        this.selectedBrands.push(_brand);
+      }
+
+      // Check if selectedCategories is not empty
+      if (this.selectedBrands.length > 0) {
+        // If not empty, add or update the 'categories' query parameter
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            brands: this.selectedBrands.join(","),
+          },
+        });
+      } else {
+        // If empty, remove the 'categories' query parameter
+        // const { categories, ...queryWithoutCategories } = this.$route.query;
+        const queryWithoutBrands = Object.assign({}, this.$route.query);
+        delete queryWithoutBrands.brands;
+
+        this.$router.push({ query: queryWithoutBrands });
       }
 
       this.loadShoes();
