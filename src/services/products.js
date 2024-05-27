@@ -15,11 +15,28 @@ export async function getProductsCategories() {
   return response;
 }
 
-export async function getProducts(_sex, _categories) {
+export async function getProducts(
+  _sex,
+  _categories,
+  _brands,
+  _minPrice,
+  _maxPrice,
+  _colors,
+  _sizes,
+  _materials,
+  _onSale
+) {
   const response = await axiosInstance
     .get(`products/sex/${_sex}`, {
       params: {
         categories: _categories,
+        brands: _brands,
+        minPrice: _minPrice,
+        maxPrice: _maxPrice,
+        colors: _colors,
+        sizes: _sizes,
+        materials: _materials,
+        onSale: _onSale,
       },
       paramsSerializer: (params) => {
         return qs.stringify(params, { arrayFormat: "brackets" });
