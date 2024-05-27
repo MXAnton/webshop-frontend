@@ -69,7 +69,12 @@
             <li>
               <Dropdown2Comp header="PRICE" parentheses="€">
                 <div class="dropdown__options-wrapper">
-                  <SliderDoubleComp :minValue="minPrice" :maxValue="maxPrice" />
+                  <SliderDoubleComp
+                    :minValue="minPrice"
+                    :maxValue="maxPrice"
+                    @min-changed="minPriceChange"
+                    @max-changed="maxPriceChange"
+                  />
                 </div>
               </Dropdown2Comp>
             </li>
@@ -180,7 +185,9 @@ export default defineComponent({
       selectedBrands: [] as string[],
 
       minPrice: 0,
+      currentMinPrice: undefined as unknown as number,
       maxPrice: 999,
+      currentMaxPrice: undefined as unknown as number,
 
       colors: [],
       selectedColors: [] as string[],
@@ -256,16 +263,16 @@ export default defineComponent({
               "female",
               this.selectedCategories,
               this.selectedBrands,
-              this.minPrice,
-              this.maxPrice,
+              this.currentMinPrice,
+              this.currentMaxPrice,
               this.selectedColors
             )
           : await getProducts(
               "male",
               this.selectedCategories,
               this.selectedBrands,
-              this.minPrice,
-              this.maxPrice,
+              this.currentMinPrice,
+              this.currentMaxPrice,
               this.selectedColors
             );
       if (res == null) {
@@ -366,6 +373,30 @@ export default defineComponent({
 
         this.$router.push({ query: queryWithoutColors });
       }
+
+      this.loadShoes();
+    },
+    minPriceChange(_newValue: number) {
+      this.currentMinPrice = _newValue;
+
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          minPrice: _newValue,
+        },
+      });
+
+      this.loadShoes();
+    },
+    maxPriceChange(_newValue: number) {
+      this.currentMaxPrice = _newValue;
+
+      this.$router.push({
+        query: {
+          ...this.$route.query,
+          maxPrice: _newValue,
+        },
+      });
 
       this.loadShoes();
     },

@@ -109,6 +109,8 @@ export default defineComponent({
       }
 
       this.fillColor();
+
+      this.$emit("min-changed", this.currentMinValue);
     },
     slideMax() {
       if (
@@ -125,6 +127,8 @@ export default defineComponent({
       }
 
       this.fillColor();
+
+      this.$emit("max-changed", this.currentMaxValue);
     },
     fillColor() {
       let percent1 =
