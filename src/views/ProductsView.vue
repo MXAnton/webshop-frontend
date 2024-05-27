@@ -69,7 +69,7 @@
             <li>
               <Dropdown2Comp header="PRICE" parentheses="€">
                 <div class="dropdown__options-wrapper">
-                  <SliderDoubleComp :minValue="50" :maxValue="345" />
+                  <SliderDoubleComp :minValue="minPrice" :maxValue="maxPrice" />
                 </div>
               </Dropdown2Comp>
             </li>
@@ -191,6 +191,9 @@ export default defineComponent({
       brands: [],
       selectedBrands: [] as string[],
 
+      minPrice: 0,
+      maxPrice: 999,
+
       initialLoading: true,
     };
   },
@@ -247,6 +250,8 @@ export default defineComponent({
       }
 
       this.brands = filters.brands;
+      this.minPrice = filters.minPrice;
+      this.maxPrice = filters.maxPrice;
 
       console.log(filters);
     },
