@@ -272,10 +272,20 @@ export default defineComponent({
     },
 
     async loadFilters() {
-      this.selectedBrands = [];
-      this.selectedColors = [];
-      this.selectedSizes = [];
-      this.selectedMaterials = [];
+      this.selectedBrands =
+        this.$route.query.brands?.toString().split(",") || [];
+      this.selectedColors =
+        this.$route.query.colors?.toString().split(",") || [];
+      this.selectedSizes = this.$route.query.sizes?.toString().split(",") || [];
+      this.selectedMaterials =
+        this.$route.query.materials?.toString().split(",") || [];
+      this.currentMinPrice = parseInt(
+        this.$route.query.minPrice?.toString() || "0"
+      );
+      this.currentMaxPrice = parseInt(
+        this.$route.query.maxPrice?.toString() || "999"
+      );
+      this.onSale = this.$route.query.onSale?.toString() || "all";
 
       let filters;
 
