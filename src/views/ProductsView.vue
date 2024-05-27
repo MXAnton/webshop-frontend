@@ -147,15 +147,34 @@
                   <div class="dropdown__option-radio-1__wrapper">
                     <label class="dropdown__option-radio-1">
                       Show all
-                      <input type="radio" name="on-sale" checked />
+                      <input
+                        type="radio"
+                        name="on-sale"
+                        value="all"
+                        v-model="onSale"
+                        @change="onSaleChange"
+                        checked
+                      />
                     </label>
                     <label class="dropdown__option-radio-1">
                       No sale
-                      <input type="radio" name="on-sale" />
+                      <input
+                        type="radio"
+                        name="on-sale"
+                        value="false"
+                        v-model="onSale"
+                        @change="onSaleChange"
+                      />
                     </label>
                     <label class="dropdown__option-radio-1">
                       On sale
-                      <input type="radio" name="on-sale" />
+                      <input
+                        type="radio"
+                        name="on-sale"
+                        value="true"
+                        v-model="onSale"
+                        @change="onSaleChange"
+                      />
                     </label>
                   </div>
                 </div>
@@ -213,6 +232,8 @@ export default defineComponent({
 
       materials: [],
       selectedMaterials: [] as string[],
+
+      onSale: "all",
 
       initialLoading: true,
     };
@@ -293,7 +314,8 @@ export default defineComponent({
               this.currentMaxPrice,
               this.selectedColors,
               this.selectedSizes,
-              this.selectedMaterials
+              this.selectedMaterials,
+              this.onSale
             )
           : await getProducts(
               "male",
@@ -303,7 +325,8 @@ export default defineComponent({
               this.currentMaxPrice,
               this.selectedColors,
               this.selectedSizes,
-              this.selectedMaterials
+              this.selectedMaterials,
+              this.onSale
             );
       if (res == null) {
         this.shoes = [];
@@ -488,6 +511,24 @@ export default defineComponent({
           maxPrice: _newValue,
         },
       });
+
+      this.loadShoes();
+    },
+
+    onSaleChange() {
+      if (this.onSale != "true" && this.onSale != "false") {
+        // No need to show onSale in path if showAll is selected
+        const queryWithoutOnSale = Object.assign({}, this.$route.query);
+        delete queryWithoutOnSale.onSale;
+        this.$router.push({ query: queryWithoutOnSale });
+      } else {
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            onSale: this.onSale,
+          },
+        });
+      }
 
       this.loadShoes();
     },
