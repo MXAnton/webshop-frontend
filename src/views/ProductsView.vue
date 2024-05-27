@@ -76,33 +76,21 @@
             <li>
               <Dropdown2Comp header="COLOR">
                 <div class="dropdown__options-wrapper">
-                  <div class="dropdown__option-color">
-                    <input type="checkbox" name="color-red" id="color-red" />
-                    <label
-                      for="color-red"
-                      style="background-color: red"
-                    ></label>
-                  </div>
-                  <div class="dropdown__option-color">
+                  <div
+                    class="dropdown__option-color"
+                    v-for="(color, i) in colors"
+                    :key="i"
+                  >
                     <input
                       type="checkbox"
-                      name="color-yellow"
-                      id="color-yellow"
+                      :name="'color-' + color"
+                      :id="'color-' + color"
+                      @change="colorChange(color)"
+                      :checked="selectedColors.indexOf(color) !== -1"
                     />
                     <label
-                      for="color-yellow"
-                      style="background-color: yellow"
-                    ></label>
-                  </div>
-                  <div class="dropdown__option-color">
-                    <input
-                      type="checkbox"
-                      name="color-black"
-                      id="color-black"
-                    />
-                    <label
-                      for="color-black"
-                      style="background-color: black"
+                      :for="'color-' + color"
+                      :style="{ 'background-color': color }"
                     ></label>
                   </div>
                 </div>
@@ -194,6 +182,9 @@ export default defineComponent({
       minPrice: 0,
       maxPrice: 999,
 
+      colors: [],
+      selectedColors: [] as string[],
+
       initialLoading: true,
     };
   },
@@ -232,6 +223,7 @@ export default defineComponent({
 
     async loadFilters() {
       this.selectedBrands = [];
+      this.selectedColors = [];
 
       let filters;
 
@@ -252,8 +244,7 @@ export default defineComponent({
       this.brands = filters.brands;
       this.minPrice = filters.minPrice;
       this.maxPrice = filters.maxPrice;
-
-      console.log(filters);
+      this.colors = filters.colors;
     },
 
     async loadShoes() {
@@ -264,12 +255,18 @@ export default defineComponent({
           ? await getProducts(
               "female",
               this.selectedCategories,
-              this.selectedBrands
+              this.selectedBrands,
+              this.minPrice,
+              this.maxPrice,
+              this.selectedColors
             )
           : await getProducts(
               "male",
               this.selectedCategories,
-              this.selectedBrands
+              this.selectedBrands,
+              this.minPrice,
+              this.maxPrice,
+              this.selectedColors
             );
       if (res == null) {
         this.shoes = [];
@@ -338,6 +335,36 @@ export default defineComponent({
         delete queryWithoutBrands.brands;
 
         this.$router.push({ query: queryWithoutBrands });
+      }
+
+      this.loadShoes();
+    },
+    colorChange(_color: string) {
+      const index = this.selectedColors.indexOf(_color);
+      if (index !== -1) {
+        // String exists, remove it
+        this.selectedColors.splice(index, 1);
+      } else {
+        // String doesn't exist, push it
+        this.selectedColors.push(_color);
+      }
+
+      // Check if selectedCategories is not empty
+      if (this.selectedColors.length > 0) {
+        // If not empty, add or update the 'categories' query parameter
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            colors: this.selectedColors.join(","),
+          },
+        });
+      } else {
+        // If empty, remove the 'categories' query parameter
+        // const { categories, ...queryWithoutCategories } = this.$route.query;
+        const queryWithoutColors = Object.assign({}, this.$route.query);
+        delete queryWithoutColors.colors;
+
+        this.$router.push({ query: queryWithoutColors });
       }
 
       this.loadShoes();
