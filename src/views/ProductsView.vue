@@ -124,13 +124,19 @@
             <li>
               <Dropdown2Comp header="MATERIAL">
                 <div class="dropdown__options-wrapper">
-                  <div class="dropdown__option-box">
+                  <div
+                    class="dropdown__option-box"
+                    v-for="(material, i) in materials"
+                    :key="i"
+                  >
                     <input
                       type="checkbox"
-                      name="material-syntet"
-                      id="material-syntet"
+                      :name="'materials-' + material"
+                      :id="'materials-' + material"
+                      @change="materialChange(material)"
+                      :checked="selectedMaterials.indexOf(material) !== -1"
                     />
-                    <label for="material-syntet">Syntet</label>
+                    <label :for="'materials-' + material">{{ material }}</label>
                   </div>
                 </div>
               </Dropdown2Comp>
@@ -205,6 +211,9 @@ export default defineComponent({
       sizes: [],
       selectedSizes: [] as string[],
 
+      materials: [],
+      selectedMaterials: [] as string[],
+
       initialLoading: true,
     };
   },
@@ -245,6 +254,7 @@ export default defineComponent({
       this.selectedBrands = [];
       this.selectedColors = [];
       this.selectedSizes = [];
+      this.selectedMaterials = [];
 
       let filters;
 
@@ -267,6 +277,7 @@ export default defineComponent({
       this.maxPrice = filters.maxPrice;
       this.colors = filters.colors;
       this.sizes = filters.sizes;
+      this.materials = filters.materials;
     },
 
     async loadShoes() {
@@ -281,7 +292,8 @@ export default defineComponent({
               this.currentMinPrice,
               this.currentMaxPrice,
               this.selectedColors,
-              this.selectedSizes
+              this.selectedSizes,
+              this.selectedMaterials
             )
           : await getProducts(
               "male",
@@ -290,7 +302,8 @@ export default defineComponent({
               this.currentMinPrice,
               this.currentMaxPrice,
               this.selectedColors,
-              this.selectedSizes
+              this.selectedSizes,
+              this.selectedMaterials
             );
       if (res == null) {
         this.shoes = [];
@@ -419,6 +432,36 @@ export default defineComponent({
         delete queryWithoutSizes.sizes;
 
         this.$router.push({ query: queryWithoutSizes });
+      }
+
+      this.loadShoes();
+    },
+    materialChange(_material: string) {
+      const index = this.selectedMaterials.indexOf(_material);
+      if (index !== -1) {
+        // String exists, remove it
+        this.selectedMaterials.splice(index, 1);
+      } else {
+        // String doesn't exist, push it
+        this.selectedMaterials.push(_material);
+      }
+
+      // Check if selectedCategories is not empty
+      if (this.selectedMaterials.length > 0) {
+        // If not empty, add or update the 'categories' query parameter
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            materials: this.selectedMaterials.join(","),
+          },
+        });
+      } else {
+        // If empty, remove the 'categories' query parameter
+        // const { categories, ...queryWithoutCategories } = this.$route.query;
+        const queryWithoutMaterials = Object.assign({}, this.$route.query);
+        delete queryWithoutMaterials.materials;
+
+        this.$router.push({ query: queryWithoutMaterials });
       }
 
       this.loadShoes();
