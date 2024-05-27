@@ -104,9 +104,19 @@
             <li>
               <Dropdown2Comp header="SIZE" parentheses="EU">
                 <div class="dropdown__options-wrapper">
-                  <div class="dropdown__option-box">
-                    <input type="checkbox" name="size-42" id="size-42" />
-                    <label for="size-42">42</label>
+                  <div
+                    class="dropdown__option-box"
+                    v-for="(size, i) in sizes"
+                    :key="i"
+                  >
+                    <input
+                      type="checkbox"
+                      :name="'sizes-' + size"
+                      :id="'sizes-' + size"
+                      @change="sizeChange(size)"
+                      :checked="selectedSizes.indexOf(size) !== -1"
+                    />
+                    <label :for="'sizes-' + size">{{ size }}</label>
                   </div>
                 </div>
               </Dropdown2Comp>
@@ -192,6 +202,9 @@ export default defineComponent({
       colors: [],
       selectedColors: [] as string[],
 
+      sizes: [],
+      selectedSizes: [] as string[],
+
       initialLoading: true,
     };
   },
@@ -231,6 +244,7 @@ export default defineComponent({
     async loadFilters() {
       this.selectedBrands = [];
       this.selectedColors = [];
+      this.selectedSizes = [];
 
       let filters;
 
@@ -252,6 +266,7 @@ export default defineComponent({
       this.minPrice = filters.minPrice;
       this.maxPrice = filters.maxPrice;
       this.colors = filters.colors;
+      this.sizes = filters.sizes;
     },
 
     async loadShoes() {
@@ -265,7 +280,8 @@ export default defineComponent({
               this.selectedBrands,
               this.currentMinPrice,
               this.currentMaxPrice,
-              this.selectedColors
+              this.selectedColors,
+              this.selectedSizes
             )
           : await getProducts(
               "male",
@@ -273,7 +289,8 @@ export default defineComponent({
               this.selectedBrands,
               this.currentMinPrice,
               this.currentMaxPrice,
-              this.selectedColors
+              this.selectedColors,
+              this.selectedSizes
             );
       if (res == null) {
         this.shoes = [];
@@ -376,6 +393,37 @@ export default defineComponent({
 
       this.loadShoes();
     },
+    sizeChange(_size: string) {
+      const index = this.selectedSizes.indexOf(_size);
+      if (index !== -1) {
+        // String exists, remove it
+        this.selectedSizes.splice(index, 1);
+      } else {
+        // String doesn't exist, push it
+        this.selectedSizes.push(_size);
+      }
+
+      // Check if selectedCategories is not empty
+      if (this.selectedSizes.length > 0) {
+        // If not empty, add or update the 'categories' query parameter
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            sizes: this.selectedSizes.join(","),
+          },
+        });
+      } else {
+        // If empty, remove the 'categories' query parameter
+        // const { categories, ...queryWithoutCategories } = this.$route.query;
+        const queryWithoutSizes = Object.assign({}, this.$route.query);
+        delete queryWithoutSizes.sizes;
+
+        this.$router.push({ query: queryWithoutSizes });
+      }
+
+      this.loadShoes();
+    },
+
     minPriceChange(_newValue: number) {
       this.currentMinPrice = _newValue;
 
