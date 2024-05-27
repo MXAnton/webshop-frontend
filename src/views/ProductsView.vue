@@ -245,6 +245,7 @@ export default defineComponent({
     },
     "$route.query": function () {
       this.loadCategories();
+      this.loadFilters();
       this.loadShoes();
     },
   },
