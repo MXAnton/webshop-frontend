@@ -66,7 +66,7 @@
 
     <nav class="header__nav-right">
       <ul>
-        <li>
+        <!-- <li>
           <div class="input-1--search">
             <input
               type="text"
@@ -78,7 +78,7 @@
               ><SearchIcon width="32" height="32"
             /></label>
           </div>
-        </li>
+        </li> -->
 
         <li>
           <router-link to="/saved-shoes">
@@ -104,7 +104,7 @@
 import { defineComponent } from "vue";
 
 import ExpandMoreIcon from "@/components/icons/ExpandMoreIcon.vue";
-import SearchIcon from "@/components/icons/SearchIcon.vue";
+// import SearchIcon from "@/components/icons/SearchIcon.vue";
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
 import ShoppingBagIcon from "@/components/icons/ShoppingBagIcon.vue";
 import AccountCircleIcon from "@/components/icons/AccountCircleIcon.vue";
@@ -114,7 +114,6 @@ export default defineComponent({
   name: "HeaderComp",
   components: {
     ExpandMoreIcon,
-    SearchIcon,
     FavoriteIcon,
     ShoppingBagIcon,
     AccountCircleIcon,
