@@ -308,7 +308,7 @@ export default defineComponent({
       this.minPrice = filters.minPrice;
       this.maxPrice = filters.maxPrice;
       this.colors = filters.colors;
-      this.sizes = filters.sizes;
+      this.sizes = filters.sizes.sort();
       this.materials = filters.materials;
     },
 
