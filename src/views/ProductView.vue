@@ -89,7 +89,9 @@
         <NumberInput1Comp
           :id="'quantity-input'"
           :label="'Quantity'"
-          :maxValue="product.sizes.length > 0 ? product.sizes[0].quantity : 0"
+          :maxValue="
+            product.sizes.length > 0 ? product.sizes[selectedSize].quantity : 0
+          "
         ></NumberInput1Comp>
 
         <Select1Comp
@@ -98,6 +100,7 @@
           :label="'Size'"
           :column="true"
           :fillHeight="true"
+          @valueChanged="sizeChanged"
         >
           <option
             v-for="size in product.sizes"
@@ -172,6 +175,7 @@ export default defineComponent({
       product: {} as Product,
       productNotFound: false,
       selectedImage: "1",
+      selectedSize: 0,
     };
   },
 
@@ -211,6 +215,12 @@ export default defineComponent({
 
     getImageUrl(_image: string) {
       return "/products/" + this.$route.params.id + "-" + _image + ".jpg";
+    },
+
+    sizeChanged(_newValue: string) {
+      this.selectedSize = this.product.sizes.findIndex(
+        (size) => size.size == _newValue
+      );
     },
   },
 
