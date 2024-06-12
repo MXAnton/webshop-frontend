@@ -42,6 +42,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    startValue: {
+      type: Number,
+      default: 0,
+    },
   },
 
   data() {
@@ -59,14 +63,24 @@ export default defineComponent({
   methods: {
     decreaseValue() {
       this.value = Math.max(0, this.value - 1);
+
+      this.$emit("valueChanged", this.value);
     },
     increaseValue() {
       this.value = Math.min(this.value + 1, this.maxValue);
+
+      this.$emit("valueChanged", this.value);
     },
 
     changedValue() {
       this.value = Math.max(0, Math.min(this.value, this.maxValue));
+
+      this.$emit("valueChanged", this.value);
     },
+  },
+
+  mounted() {
+    this.value = this.startValue;
   },
 });
 </script>

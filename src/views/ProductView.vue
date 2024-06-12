@@ -92,6 +92,8 @@
           :maxValue="
             product.sizes.length > 0 ? product.sizes[selectedSize].quantity : 0
           "
+          :startValue="quantity"
+          @valueChanged="quantityChanged"
         ></NumberInput1Comp>
 
         <Select1Comp
@@ -175,7 +177,9 @@ export default defineComponent({
       product: {} as Product,
       productNotFound: false,
       selectedImage: "1",
+
       selectedSize: 0,
+      quantity: 1,
     };
   },
 
@@ -221,6 +225,9 @@ export default defineComponent({
       this.selectedSize = this.product.sizes.findIndex(
         (size) => size.size == _newValue
       );
+    },
+    quantityChanged(_newValue: number) {
+      this.quantity = _newValue;
     },
   },
 
