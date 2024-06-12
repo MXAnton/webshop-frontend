@@ -2,7 +2,7 @@
   <div class="select-1" :class="{ column: column, 'fill-height': fillHeight }">
     <label v-if="label != null" :for="id">{{ label }}:</label>
     <div>
-      <select :name="id" :id="id">
+      <select :name="id" :id="id" @change="onChange">
         <slot></slot>
       </select>
 
@@ -29,6 +29,13 @@ export default defineComponent({
     label: String,
     column: Boolean,
     fillHeight: Boolean,
+  },
+
+  methods: {
+    // eslint-disable-next-line
+    onChange(_event: any) {
+      this.$emit("valueChanged", _event.target.value);
+    },
   },
 });
 </script>

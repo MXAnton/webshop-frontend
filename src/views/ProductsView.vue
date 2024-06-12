@@ -185,12 +185,30 @@
 
         <div>
           <div class="products__sorting">
-            <Select1Comp :id="'sort-by'" :label="'Sort by'">
-              <option value="relevance">Relevance</option>
-              <option value="lowest-price">Lowest Price</option>
-              <option value="highest-price">Highest Price</option>
-              <option value="a-z">A-Z</option>
-              <option value="z-a">Z-A</option></Select1Comp
+            <Select1Comp
+              :id="'sort-by'"
+              :label="'Sort by'"
+              @valueChanged="sortingChange"
+            >
+              <option value="relevance" :selected="sorting == 'relevance'">
+                Relevance
+              </option>
+              <option
+                value="lowest-price"
+                :selected="sorting == 'lowest-price'"
+              >
+                Lowest Price
+              </option>
+              <option
+                value="highest-price"
+                :selected="sorting == 'highest-price'"
+              >
+                Highest Price
+              </option>
+              <option value="a-z" :selected="sorting == 'a-z'">A-Z</option>
+              <option value="z-a" :selected="sorting == 'z-a'">
+                Z-A
+              </option></Select1Comp
             >
 
             <p class="products__amount">{{ shoes.length }} articles</p>
@@ -251,6 +269,8 @@ export default defineComponent({
 
       onSale: "all",
 
+      sorting: "relevance",
+
       initialLoading: true,
     };
   },
@@ -304,6 +324,8 @@ export default defineComponent({
       );
       this.onSale = this.$route.query.onSale?.toString() || "all";
 
+      this.sorting = this.$route.query.sorting?.toString() || "relevance";
+
       let filters;
 
       if (this.$route.name === "productsMen") {
@@ -342,7 +364,8 @@ export default defineComponent({
               this.selectedColors,
               this.selectedSizes,
               this.selectedMaterials,
-              this.onSale
+              this.onSale,
+              this.sorting
             )
           : await getProducts(
               "male",
@@ -353,7 +376,8 @@ export default defineComponent({
               this.selectedColors,
               this.selectedSizes,
               this.selectedMaterials,
-              this.onSale
+              this.onSale,
+              this.sorting
             );
       if (res == null) {
         this.shoes = [];
@@ -553,6 +577,26 @@ export default defineComponent({
           query: {
             ...this.$route.query,
             onSale: this.onSale,
+          },
+        });
+      }
+
+      this.loadShoes();
+    },
+
+    sortingChange(_newValue: string) {
+      this.sorting = _newValue;
+
+      if (this.sorting === "relevance") {
+        // No need to show sorting in path if relevance (default) is selected
+        const queryWithoutSorting = Object.assign({}, this.$route.query);
+        delete queryWithoutSorting.sorting;
+        this.$router.push({ query: queryWithoutSorting });
+      } else {
+        this.$router.push({
+          query: {
+            ...this.$route.query,
+            sorting: this.sorting,
           },
         });
       }

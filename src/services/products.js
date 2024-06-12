@@ -38,7 +38,8 @@ export async function getProducts(
   _colors,
   _sizes,
   _materials,
-  _onSale
+  _onSale,
+  _sorting
 ) {
   const response = await axiosInstance
     .get(`products/sex/${_sex}`, {
@@ -51,6 +52,7 @@ export async function getProducts(
         sizes: _sizes,
         materials: _materials,
         onSale: _onSale,
+        sorting: _sorting,
       },
       paramsSerializer: (params) => {
         return qs.stringify(params, { arrayFormat: "brackets" });
