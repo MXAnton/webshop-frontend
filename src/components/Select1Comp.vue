@@ -94,11 +94,7 @@ export default defineComponent({
 .select-1 select::-ms-expand {
   display: none;
 }
-.select-1 select option {
-  background-color: var(--color-secondary);
-  color: var(--color-background);
-  font-weight: 600;
-}
+
 .select-1 svg {
   pointer-events: none;
 
@@ -112,5 +108,13 @@ export default defineComponent({
 }
 .select-1 > div:has(select:focus) {
   border-color: var(--yellow);
+}
+</style>
+
+<style>
+.select-1 select option {
+  background-color: var(--color-secondary);
+  color: var(--color-background);
+  font-weight: 600;
 }
 </style>
