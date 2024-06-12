@@ -31,20 +31,22 @@
   </main>
   <main v-else-if="product.product_id != null" class="product">
     <section class="images">
-      <div class="selected-image__wrapper">
+      <button class="selected-image__wrapper" @click="zoomImage">
         <img
-          :src="getImageUrl(selectedImage)"
+          :src="getImageUrl(images[selectedImage])"
           alt="Selected image of product"
         />
-      </div>
+
+        <ZoomInIcon :size="'2rem'" class="zoom-icon" />
+      </button>
       <nav>
         <ul>
           <li
-            v-for="(image, i) in product.images.split(',')"
+            v-for="(image, i) in images"
             :key="i"
-            :class="{ selected: image == selectedImage }"
+            :class="{ selected: image == images[selectedImage] }"
           >
-            <button @click="selectedImage = image">
+            <button @click="selectedImage = i">
               <img :src="getImageUrl(image)" alt="Image of product" />
             </button>
           </li>
@@ -222,6 +224,33 @@
       </Dropdown2Comp>
     </section>
   </main>
+
+  <dialog
+    v-if="product.product_id != null"
+    class="zoomed-image"
+    ref="zoomedImage"
+  >
+    <button @click="prevImage" class="btn--primary btn--arrow">
+      <ArrowIcon :flipX="true" />
+    </button>
+    <div class="zoomed-image__wrapper">
+      <img
+        :src="getImageUrl(images[selectedImage])"
+        alt="Selected image of product"
+      />
+      <p>{{ selectedImage + 1 }} / {{ images.length }}</p>
+    </div>
+    <button
+      @click="nextImage"
+      class="btn--primary btn--arrow btn--arrow--right"
+    >
+      <ArrowIcon />
+    </button>
+
+    <button @click="unzoomImage" class="btn--primary btn--circle btn--close">
+      <CrossIcon />
+    </button>
+  </dialog>
 </template>
 
 <script lang="ts">
@@ -239,6 +268,9 @@ import ShoppingBagIcon from "@/components/icons/ShoppingBagIcon.vue";
 import StarIcon from "@/components/icons/StarIcon.vue";
 import BlockIcon from "@/components/icons/BlockIcon.vue";
 import Dropdown2Comp from "@/components/Dropdown2Comp.vue";
+import ZoomInIcon from "@/components/icons/ZoomInIcon.vue";
+import ArrowIcon from "@/components/icons/ArrowIcon.vue";
+import CrossIcon from "@/components/icons/CrossIcon.vue";
 
 interface Product {
   product_id: number;
@@ -263,6 +295,12 @@ interface Size {
   quantity: number;
 }
 
+// Extend the HTMLDialogElement interface to include showModal and close methods
+interface HTMLDialogElement extends HTMLElement {
+  showModal: () => void;
+  close: () => void;
+}
+
 export default defineComponent({
   name: "MenShoesView",
   components: {
@@ -274,13 +312,17 @@ export default defineComponent({
     BlockIcon,
     Dropdown2Comp,
     StarIcon,
+    ZoomInIcon,
+    ArrowIcon,
+    CrossIcon,
   },
 
   data() {
     return {
       product: {} as Product,
       productNotFound: false,
-      selectedImage: "1",
+      selectedImage: 0,
+      images: [] as string[],
 
       selectedSize: 0,
       quantity: 1,
@@ -319,6 +361,8 @@ export default defineComponent({
       } else {
         this.product = { ...res.data.data, colors: prevColors };
       }
+
+      this.images = this.product.images.split(",");
     },
 
     getImageUrl(_image: string) {
@@ -333,6 +377,36 @@ export default defineComponent({
     quantityChanged(_newValue: number) {
       this.quantity = _newValue;
     },
+
+    zoomImage() {
+      const zoomedImage = this.$refs.zoomedImage as HTMLDialogElement;
+      zoomedImage?.showModal();
+    },
+    unzoomImage() {
+      const zoomedImage = this.$refs.zoomedImage as HTMLDialogElement;
+      zoomedImage?.close();
+    },
+
+    prevImage() {
+      const newSelectedImage = this.selectedImage - 1;
+
+      if (newSelectedImage < 0) {
+        this.selectedImage = this.images.length - 1;
+        return;
+      }
+
+      this.selectedImage = newSelectedImage;
+    },
+    nextImage() {
+      const newSelectedImage = this.selectedImage + 1;
+
+      if (newSelectedImage > this.images.length - 1) {
+        this.selectedImage = 0;
+        return;
+      }
+
+      this.selectedImage = newSelectedImage;
+    },
   },
 
   created() {
@@ -343,8 +417,85 @@ export default defineComponent({
 
 <style scoped>
 .images .selected-image__wrapper {
+  display: block;
   margin-bottom: 1rem;
+
+  position: relative;
 }
+.images .selected-image__wrapper .zoom-icon {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+
+  fill: #13151597;
+
+  transform: scale(1);
+  transition: 0.2s ease-in-out transform;
+}
+.images .selected-image__wrapper:hover .zoom-icon {
+  transform: scale(1.2);
+}
+.selected-image__wrapper img {
+  width: 100%;
+  min-height: 15rem;
+  border-radius: 4px;
+  background-color: var(--blue);
+}
+
+.zoomed-image {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 1rem;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.274);
+}
+.zoomed-image > .btn--arrow {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.zoomed-image > .btn--arrow--right {
+  right: 1rem;
+  left: unset;
+}
+.zoomed-image .btn--close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+}
+.zoomed-image__wrapper {
+  position: relative;
+}
+.zoomed-image__wrapper img {
+  object-fit: contain;
+  width: 100%;
+  max-height: calc(100svh - 2rem);
+}
+.zoomed-image__wrapper p {
+  font-size: 1rem;
+  background-color: var(--white);
+  color: var(--black);
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  text-align: center;
+
+  position: absolute;
+  bottom: 0.5em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .images ul {
   display: flex;
   gap: 0.75rem;
@@ -433,13 +584,6 @@ export default defineComponent({
   border-radius: 2px;
 
   background-color: var(--white-2);
-}
-
-.selected-image__wrapper img {
-  width: 100%;
-  min-height: 15rem;
-  border-radius: 4px;
-  background-color: var(--blue);
 }
 
 .info {
