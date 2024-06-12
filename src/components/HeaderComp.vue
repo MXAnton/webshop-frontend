@@ -15,7 +15,7 @@
         <li>
           <div class="dropdown-1">
             <router-link class="btn" to="/products/men">
-              <span>MEN</span>
+              <span>Men</span>
               <ExpandMoreIcon
             /></router-link>
 
@@ -35,7 +35,7 @@
         <li>
           <div class="dropdown-1">
             <router-link class="btn" to="/products/women">
-              <span>WOMEN</span>
+              <span>Women</span>
               <ExpandMoreIcon
             /></router-link>
 
@@ -56,10 +56,10 @@
           </div>
         </li>
         <li>
-          <router-link to="/about">ABOUT</router-link>
+          <router-link to="/about">About</router-link>
         </li>
         <li>
-          <router-link to="/contact">CONTACT</router-link>
+          <router-link to="/contact">Contact</router-link>
         </li>
       </ul>
     </nav>
@@ -158,5 +158,10 @@ header {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+header button,
+header a {
+  text-transform: uppercase;
 }
 </style>
