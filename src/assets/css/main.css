@@ -411,8 +411,13 @@ p.long {
   border-radius: 4px;
 }
 
+.btn--icon {
+  display: flex;
+}
+
 .btn--primary:disabled,
-.btn--secondary:disabled {
+.btn--secondary:disabled,
+.btn--icon:disabled {
   cursor: not-allowed;
   filter: grayscale(1);
 }

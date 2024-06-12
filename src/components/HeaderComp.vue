@@ -3,7 +3,7 @@
     <nav class="header__nav-left">
       <ul>
         <li>
-          <router-link to="/">
+          <router-link to="/" class="btn--icon">
             <img
               width="48"
               height="48"
@@ -81,17 +81,17 @@
         </li> -->
 
         <li>
-          <router-link to="/saved-shoes">
+          <router-link to="/saved-shoes" class="btn--icon">
             <FavoriteIcon width="32" height="32"
           /></router-link>
         </li>
         <li>
-          <router-link to="/basket">
+          <router-link to="/basket" class="btn--icon">
             <ShoppingBagIcon width="32" height="32"
           /></router-link>
         </li>
         <li>
-          <router-link to="/account">
+          <router-link to="/account" class="btn--icon">
             <AccountCircleIcon width="32" height="32"
           /></router-link>
         </li>
