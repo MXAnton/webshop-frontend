@@ -133,6 +133,31 @@
         <BlockIcon :color="'var(--yellow)'" :size="'1.25rem'" />
         <p>Out-of-stock</p>
       </div>
+
+      <Dropdown2Comp class="mt-3" header="DETAILS">
+        <ul class="details">
+          <li>
+            <h3>Name:</h3>
+            <p>{{ product.name }}</p>
+          </li>
+          <li>
+            <h3>Brand:</h3>
+            <p>{{ product.brand }}</p>
+          </li>
+          <li>
+            <h3>Sex:</h3>
+            <p>{{ product.sex }}</p>
+          </li>
+          <li>
+            <h3>Color:</h3>
+            <p>{{ product.color }}</p>
+          </li>
+          <li>
+            <h3>Material:</h3>
+            <p>{{ product.material }}</p>
+          </li>
+        </ul>
+      </Dropdown2Comp>
     </section>
   </main>
 </template>
@@ -150,6 +175,7 @@ import NumberInput1Comp from "@/components/NumberInput1Comp.vue";
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
 import ShoppingBagIcon from "@/components/icons/ShoppingBagIcon.vue";
 import BlockIcon from "@/components/icons/BlockIcon.vue";
+import Dropdown2Comp from "@/components/Dropdown2Comp.vue";
 
 interface Product {
   product_id: number;
@@ -163,6 +189,7 @@ interface Product {
   colors: Color[];
   sizes: Size[];
   images: string;
+  material: string;
 }
 interface Color {
   id: number;
@@ -182,6 +209,7 @@ export default defineComponent({
     FavoriteIcon,
     ShoppingBagIcon,
     BlockIcon,
+    Dropdown2Comp,
   },
 
   data() {
@@ -384,6 +412,26 @@ export default defineComponent({
 .out-of-stock p {
   font-size: 1em;
   --color-text: var(--white-2);
+}
+
+.details {
+  display: grid;
+  gap: 0.5rem;
+}
+.details li {
+  font-size: 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.details h3 {
+  font-size: 1em;
+  font-weight: 700;
+}
+.details p {
+  font-size: 1em;
+  text-transform: capitalize;
 }
 
 .not-found .section__wrapper > * {
