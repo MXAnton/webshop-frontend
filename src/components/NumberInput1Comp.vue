@@ -6,7 +6,7 @@
         type="number"
         :name="id"
         :id="id"
-        min="0"
+        :min="minValue"
         :max="maxValue"
         v-model="value"
         @input="changedValue"
@@ -38,6 +38,10 @@ export default defineComponent({
       required: true,
     },
     label: String,
+    minValue: {
+      type: Number,
+      default: 0,
+    },
     maxValue: {
       type: Number,
       required: true,
@@ -62,7 +66,7 @@ export default defineComponent({
 
   methods: {
     decreaseValue() {
-      this.value = Math.max(0, this.value - 1);
+      this.value = Math.max(this.minValue, this.value - 1);
 
       this.$emit("valueChanged", this.value);
     },
@@ -73,7 +77,7 @@ export default defineComponent({
     },
 
     changedValue() {
-      this.value = Math.max(0, Math.min(this.value, this.maxValue));
+      this.value = Math.max(this.minValue, Math.min(this.value, this.maxValue));
 
       this.$emit("valueChanged", this.value);
     },

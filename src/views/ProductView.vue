@@ -89,9 +89,8 @@
         <NumberInput1Comp
           :id="'quantity-input'"
           :label="'Quantity'"
-          :maxValue="
-            product.sizes.length > 0 ? product.sizes[selectedSize].quantity : 0
-          "
+          :minValue="1"
+          :maxValue="Math.max(1, product.sizes[selectedSize].quantity)"
           :startValue="quantity"
           @valueChanged="quantityChanged"
         ></NumberInput1Comp>
