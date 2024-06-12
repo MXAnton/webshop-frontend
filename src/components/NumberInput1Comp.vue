@@ -50,6 +50,12 @@ export default defineComponent({
     };
   },
 
+  watch: {
+    maxValue() {
+      this.changedValue();
+    },
+  },
+
   methods: {
     decreaseValue() {
       this.value = Math.max(0, this.value - 1);
