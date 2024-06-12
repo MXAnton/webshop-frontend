@@ -123,6 +123,14 @@
           Add to cart <ShoppingBagIcon />
         </button>
       </div>
+
+      <div
+        class="out-of-stock"
+        v-if="product.sizes[selectedSize].quantity == 0"
+      >
+        <BlockIcon :color="'var(--yellow)'" :size="'1.25rem'" />
+        <p>Out-of-stock</p>
+      </div>
     </section>
   </main>
 </template>
@@ -139,6 +147,7 @@ import Select1Comp from "@/components/Select1Comp.vue";
 import NumberInput1Comp from "@/components/NumberInput1Comp.vue";
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
 import ShoppingBagIcon from "@/components/icons/ShoppingBagIcon.vue";
+import BlockIcon from "@/components/icons/BlockIcon.vue";
 
 interface Product {
   product_id: number;
@@ -170,6 +179,7 @@ export default defineComponent({
     NumberInput1Comp,
     FavoriteIcon,
     ShoppingBagIcon,
+    BlockIcon,
   },
 
   data() {
@@ -358,6 +368,20 @@ export default defineComponent({
 }
 .buy-cta svg {
   font-size: 1.5em;
+}
+
+.out-of-stock {
+  margin-top: 0.4em;
+
+  font-size: 0.875rem;
+
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+.out-of-stock p {
+  font-size: 1em;
+  --color-text: var(--white-2);
 }
 
 .not-found .section__wrapper > * {
