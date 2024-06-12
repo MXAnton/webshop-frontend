@@ -46,7 +46,7 @@
         <ul>
           <li>
             <a
-              href="https://www.linkedin.com/in/anton-lehrberg-420a6b26b/"
+              href="https://www.linkedin.com/in/anton-lehrberg/"
               target="_blank"
               rel="noopener noreferrer"
               >LinkedIn</a
