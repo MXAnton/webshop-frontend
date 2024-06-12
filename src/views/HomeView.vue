@@ -58,7 +58,7 @@
       <div class="section__wrapper">
         <h2>BEST SELLERS</h2>
 
-        <ProductsGalleryComp :withSorting="false" :shoes="bestSellingShoes" />
+        <ProductsGalleryComp :shoes="bestSellingShoes" />
       </div>
     </section>
   </main>

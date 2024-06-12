@@ -1,6 +1,6 @@
 <template>
   <div class="products__main-content">
-    <div class="main-content__top" v-if="withSorting">
+    <!-- <div class="main-content__top" v-if="withSorting">
       <Select1Comp :id="'sort-by'" :label="'Sort by'">
         <option value="relevance">Relevance</option>
         <option value="lowest-price">Lowest Price</option>
@@ -10,7 +10,7 @@
       >
 
       <p class="products__amount">{{ shoes.length }} articles</p>
-    </div>
+    </div> -->
 
     <div class="products__gallery">
       <ul>
@@ -45,7 +45,6 @@
 import { defineComponent } from "vue";
 
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
-import Select1Comp from "./Select1Comp.vue";
 
 interface Shoe {
   id: number;
@@ -58,17 +57,12 @@ export default defineComponent({
   name: "ProductsGalleryComp",
   components: {
     FavoriteIcon,
-    Select1Comp,
   },
 
   props: {
     shoes: {
       type: Array as () => Shoe[],
       required: true,
-    },
-    withSorting: {
-      type: Boolean,
-      default: true,
     },
   },
 });
@@ -77,19 +71,6 @@ export default defineComponent({
 <style scoped>
 .products__main-content {
   flex: 1 1 0;
-}
-
-.main-content__top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 4rem;
-}
-
-.products__amount {
-  font-weight: 200;
-  font-size: 0.875rem;
 }
 
 .products__gallery ul {

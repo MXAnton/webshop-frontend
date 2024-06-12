@@ -183,7 +183,21 @@
           </ul>
         </div>
 
-        <ProductsGalleryComp :shoes="shoes" />
+        <div>
+          <div class="products__sorting">
+            <Select1Comp :id="'sort-by'" :label="'Sort by'">
+              <option value="relevance">Relevance</option>
+              <option value="lowest-price">Lowest Price</option>
+              <option value="highest-price">Highest Price</option>
+              <option value="a-z">A-Z</option>
+              <option value="z-a">Z-A</option></Select1Comp
+            >
+
+            <p class="products__amount">{{ shoes.length }} articles</p>
+          </div>
+
+          <ProductsGalleryComp :shoes="shoes" />
+        </div>
       </div>
     </section>
   </main>
@@ -196,6 +210,7 @@ import ProductsNavComp from "@/components/ProductsNavComp.vue";
 import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
 import Dropdown2Comp from "@/components/Dropdown2Comp.vue";
 import SliderDoubleComp from "@/components/SliderDoubleComp.vue";
+import Select1Comp from "@/components/Select1Comp.vue";
 
 import { getProducts } from "@/services/products";
 import store from "@/store";
@@ -207,6 +222,7 @@ export default defineComponent({
     ProductsGalleryComp,
     Dropdown2Comp,
     SliderDoubleComp,
+    Select1Comp,
   },
 
   data() {
@@ -560,6 +576,19 @@ export default defineComponent({
 
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+.products__sorting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 4rem;
+}
+
+.products__amount {
+  font-weight: 200;
+  font-size: 0.875rem;
 }
 
 /* PRODUCTS */
