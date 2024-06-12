@@ -10,10 +10,10 @@
         <h2>SHOPPING</h2>
         <ul>
           <li>
-            <router-link to="/women">Women</router-link>
+            <router-link to="/products/women">Women</router-link>
           </li>
           <li>
-            <router-link to="/men">Men</router-link>
+            <router-link to="/products/men">Men</router-link>
           </li>
         </ul>
       </nav>
