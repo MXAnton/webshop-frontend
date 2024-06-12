@@ -158,6 +158,68 @@
           </li>
         </ul>
       </Dropdown2Comp>
+
+      <Dropdown2Comp class="mt-3" header="REVIEWS">
+        <ul class="reviews">
+          <li>
+            <div>
+              <h3>Best shoes I have tried!!!</h3>
+              <ul>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+              </ul>
+            </div>
+
+            <p>
+              I bought these shoes 4 months ago and it is the best shoes I have
+              ever tried!! I will definitly buy them again when my current shoes
+              break!
+            </p>
+
+            <p>// Robert Andersson</p>
+          </li>
+
+          <li>
+            <div>
+              <h3>Very good shoes!</h3>
+              <ul>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--yellow-2)'" />
+                </li>
+                <li>
+                  <StarIcon :size="'0.875rem'" :color="'var(--black)'" />
+                </li>
+              </ul>
+            </div>
+
+            <p>I like these shoes a lot! Big recommend!</p>
+
+            <p>// Berit Lind</p>
+          </li>
+        </ul>
+      </Dropdown2Comp>
     </section>
   </main>
 </template>
@@ -174,6 +236,7 @@ import Select1Comp from "@/components/Select1Comp.vue";
 import NumberInput1Comp from "@/components/NumberInput1Comp.vue";
 import FavoriteIcon from "@/components/icons/FavoriteIcon.vue";
 import ShoppingBagIcon from "@/components/icons/ShoppingBagIcon.vue";
+import StarIcon from "@/components/icons/StarIcon.vue";
 import BlockIcon from "@/components/icons/BlockIcon.vue";
 import Dropdown2Comp from "@/components/Dropdown2Comp.vue";
 
@@ -210,6 +273,7 @@ export default defineComponent({
     ShoppingBagIcon,
     BlockIcon,
     Dropdown2Comp,
+    StarIcon,
   },
 
   data() {
@@ -432,6 +496,40 @@ export default defineComponent({
 .details p {
   font-size: 1em;
   text-transform: capitalize;
+}
+
+.reviews {
+  display: grid;
+  gap: 0.4rem;
+}
+.reviews > li {
+  display: grid;
+  gap: 0.625rem;
+  padding: 0.75rem 1rem 1.25rem;
+  border-radius: 2px;
+
+  --color-text: var(--black);
+  --color-background: var(--white);
+  background-color: var(--color-background);
+}
+.reviews > li > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+.reviews > li h3 {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.reviews > li > div ul {
+  display: flex;
+  gap: 0.2rem;
+}
+.reviews > li p {
+  font-size: 0.75rem;
+}
+.reviews > li p:last-child {
+  font-weight: 300;
 }
 
 .not-found .section__wrapper > * {
