@@ -93,9 +93,22 @@ export default defineComponent({
 }
 
 .products__gallery ul {
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr)); */
+
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem 1rem;
+}
+@media only screen and (max-width: 70rem) {
+  .products__gallery ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media only screen and (max-width: 50rem) {
+  .products__gallery ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .product > a {

@@ -169,48 +169,10 @@ export default defineComponent({
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
+</style>
 
-.best-sellers ul {
-  display: flex;
-  gap: 1rem;
-}
-
-.product {
-  font-size: 1rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.product__image-wrapper {
-  position: relative;
-
-  height: 13.75em;
-
-  border-radius: 4px;
-  overflow: hidden;
-
-  --color-text: var(--color-background);
-}
-.product__image-wrapper img {
-  height: 100%;
-  width: 100%;
-}
-.product__image-wrapper svg {
-  position: absolute;
-  top: 3%;
-  right: 3%;
-}
-
-.product h3 {
-  font-size: 1.5em;
-  font-weight: 700;
-
-  margin-top: 0.4em;
-  margin-bottom: 0em;
-}
-.product p {
-  font-size: 1em;
+<style>
+.best-sellers .products__gallery ul {
+  grid-template-columns: repeat(3, 1fr);
 }
 </style>
