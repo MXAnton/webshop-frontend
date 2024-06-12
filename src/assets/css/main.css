@@ -411,6 +411,12 @@ p.long {
   border-radius: 4px;
 }
 
+.btn--primary:disabled,
+.btn--secondary:disabled {
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
 .btn--large {
   font-size: 1.5rem;
 }

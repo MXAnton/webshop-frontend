@@ -119,7 +119,10 @@
           <FavoriteIcon />
         </button>
 
-        <button class="btn--primary uppercase">
+        <button
+          class="btn--primary uppercase"
+          :disabled="product.sizes[selectedSize].quantity == 0"
+        >
           Add to cart <ShoppingBagIcon />
         </button>
       </div>
