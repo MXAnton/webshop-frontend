@@ -73,7 +73,7 @@
     </div>
 
     <div class="footer__bottom">
-      <span class="footer__copyright">
+      <div class="footer__copyright">
         © {{ new Date().getFullYear() }} Anton Lehrberg -
         <a
           href="https://antonlehrberg.netlify.app/"
@@ -81,7 +81,7 @@
           rel="noopener noreferrer"
           >My Portfolio</a
         >
-      </span>
+      </div>
     </div>
   </footer>
 </template>
@@ -96,8 +96,8 @@ export default defineComponent({
 
 <style scoped>
 footer {
+  width: 100%;
   max-width: 80rem;
-
   margin: 0 auto;
   padding: 6.25rem 4rem;
 
@@ -113,8 +113,11 @@ footer h2 {
 }
 
 .footer__top {
-  display: flex;
-  gap: 5rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  justify-content: space-between;
+  gap: 4rem 3rem;
 }
 .footer__top a {
   font-family: "Chivo Mono", monospace;
@@ -125,6 +128,9 @@ footer h2 {
   font-size: 2.25rem;
 }
 
+.footer__nav-list {
+  max-width: 20em;
+}
 .footer__nav-list h2 {
   margin-bottom: 0.2rem;
 }
@@ -141,9 +147,46 @@ footer h2 {
   font-family: "Chivo Mono", monospace;
   font-weight: 100;
   font-size: 1rem;
+  text-align: center;
 }
 .footer__copyright a {
   text-decoration: underline;
   text-underline-offset: 0.1em;
+}
+
+@media only screen and (max-width: 70rem) {
+  .footer__top {
+    grid-template-columns: auto auto auto;
+    justify-content: start;
+  }
+
+  .footer__nav-list:last-child {
+    grid-column: 1 / span 3;
+    max-width: 30em;
+  }
+}
+@media only screen and (max-width: 45rem) {
+  .footer__top {
+    grid-template-columns: auto auto;
+  }
+
+  .footer__brand,
+  .footer__nav-list:last-child {
+    grid-column: 1 / span 2;
+  }
+
+  .footer__copyright {
+    max-width: 14em;
+  }
+}
+@media only screen and (max-width: 29rem) {
+  .footer__top {
+    grid-template-columns: auto;
+  }
+
+  .footer__brand,
+  .footer__nav-list:last-child {
+    grid-column: 1 / span 1;
+  }
 }
 </style>
