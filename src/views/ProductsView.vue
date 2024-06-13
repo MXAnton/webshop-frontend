@@ -645,6 +645,7 @@ export default defineComponent({
 /* FILTERS */
 .products__filters {
   width: 15rem;
+  min-width: 15rem;
 
   display: flex;
   flex-direction: column;
