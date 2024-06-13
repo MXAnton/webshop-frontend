@@ -55,6 +55,8 @@ p.long {
   flex-direction: column;
   gap: 0.4em;
 
+  z-index: 2;
+
   transition: height 0.2s ease-in-out, opacity 0.2s ease-in-out;
 }
 .dropdown-1 .dropdown__content li > * {
