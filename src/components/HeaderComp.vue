@@ -144,6 +144,8 @@ header {
 
   font-family: "Arvo", serif; /* LOGO FONT */
   font-size: 1rem;
+
+  z-index: 2;
 }
 
 /* NAV LEFT */
