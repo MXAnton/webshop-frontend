@@ -141,8 +141,8 @@ export default defineComponent({
 
 .purshase-info ul {
   display: flex;
-  gap: 3rem;
   justify-content: space-between;
+  gap: 3rem;
 }
 
 .purshase-info li {
@@ -175,11 +175,28 @@ export default defineComponent({
   .hero__img-wrapper {
     display: none;
   }
+
+  .purshase-info ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 1rem;
+  }
+}
+@media only screen and (max-width: 30rem) {
+  .purshase-info ul {
+    margin-left: 0;
+  }
 }
 </style>
 
 <style>
 .best-sellers .products__gallery ul {
   grid-template-columns: repeat(3, 1fr);
+}
+@media only screen and (max-width: 30rem) {
+  .best-sellers .products__gallery ul {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
