@@ -12,4 +12,12 @@
   --color-background: var(--black);
   --color-primary: var(--blue);
   --color-secondary: var(--white-2);
+
+  --padding-horizontal: 4rem;
+}
+
+@media only screen and (max-width: 30rem) {
+  :root {
+    --padding-horizontal: 2rem;
+  }
 }

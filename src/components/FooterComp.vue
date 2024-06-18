@@ -99,7 +99,7 @@ footer {
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
-  padding: 6.25rem 4rem;
+  padding: 6.25rem var(--padding-horizontal);
 
   display: flex;
   flex-direction: column;

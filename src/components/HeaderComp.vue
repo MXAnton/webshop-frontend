@@ -215,7 +215,7 @@ header {
   max-width: 80rem;
 
   margin: 0 auto;
-  padding: 1rem 4rem;
+  padding: 1rem var(--padding-horizontal);
 
   display: flex;
   justify-content: space-between;
