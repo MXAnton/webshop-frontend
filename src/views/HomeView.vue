@@ -110,14 +110,15 @@ export default defineComponent({
 /* HERO */
 .hero {
   width: 100%;
-  /* min-height: 80vh; */
 }
 
 .hero .section__wrapper {
+  min-height: 36rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 6.25rem;
+  gap: 1rem;
 }
 
 .hero p {
@@ -168,6 +169,12 @@ export default defineComponent({
 
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+@media only screen and (max-width: 71rem) {
+  .hero__img-wrapper {
+    display: none;
+  }
 }
 </style>
 
