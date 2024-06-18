@@ -3,10 +3,8 @@
     <nav class="header__nav-left">
       <ul>
         <li>
-          <router-link to="/" class="btn--icon">
+          <router-link to="/" class="btn--icon btn--logo">
             <img
-              width="48"
-              height="48"
               alt="Your Shoes logo with text YOUR and below is an image of a shoe"
               src="../assets/logos/logo2_background.svg"
           /></router-link>
@@ -246,6 +244,15 @@ header a {
   text-transform: uppercase;
 }
 
+.btn--logo {
+  width: 3rem;
+  height: 3rem;
+}
+.btn--logo img {
+  width: 100%;
+  height: 100%;
+}
+
 /* ____ HAMBURGER MENU NAV ___ */
 .hamburger-menu {
   position: relative;
@@ -308,6 +315,11 @@ header a {
   }
   .header--medium {
     display: block;
+  }
+
+  .btn--logo {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
 </style>
