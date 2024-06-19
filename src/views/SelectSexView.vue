@@ -38,12 +38,15 @@ export default defineComponent({
   width: 100%;
 
   display: flex;
-  gap: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
 }
 
 .select-gender__buttons .btn--primary {
   flex: 1 1 0;
-  min-height: 30vh;
+
+  min-width: 6em;
+  height: 5em;
 
   display: flex;
   align-items: center;
@@ -58,5 +61,12 @@ export default defineComponent({
 .select-gender__buttons .btn--primary:hover {
   transform: translateY(-3%);
   border-bottom: 3px solid var(--color-text);
+}
+
+@media only screen and (max-width: 30rem) {
+  .select-gender__buttons .btn--primary {
+    font-size: 2rem;
+    height: 4em;
+  }
 }
 </style>
