@@ -657,4 +657,31 @@ export default defineComponent({
   flex-direction: column;
   gap: 2.5rem;
 }
+
+@media only screen and (max-width: 44rem) {
+  .products .section__wrapper {
+    flex-direction: column;
+  }
+
+  .products__filters {
+    width: 100%;
+  }
+  .filters__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+@media only screen and (max-width: 34rem) {
+  .filters__list {
+    grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 25rem) {
+  .products__sorting {
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+  }
+}
 </style>
