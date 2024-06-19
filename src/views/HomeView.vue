@@ -22,7 +22,7 @@
 
     <section class="purshase-info">
       <div class="section__wrapper">
-        <ul>
+        <SlideshowInfiniteComp>
           <li>
             <div>
               <LocalShippingIcon width="64" height="64" />
@@ -49,8 +49,8 @@
               <h2 class="h4-size">100% PAYMENT SECURE</h2>
               <p>Simply return it within 30 days for an exchange</p>
             </div>
-          </li>
-        </ul>
+          </li></SlideshowInfiniteComp
+        >
       </div>
     </section>
 
@@ -72,6 +72,7 @@ import UndoIcon from "@/components/icons/UndoIcon.vue";
 import PaymentsIcon from "@/components/icons/PaymentsIcon.vue";
 import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
 import { getBestSellers } from "@/services/products";
+import SlideshowInfiniteComp from "@/components/SlideshowInfiniteComp.vue";
 
 export default defineComponent({
   name: "HomeView",
@@ -80,6 +81,7 @@ export default defineComponent({
     UndoIcon,
     PaymentsIcon,
     ProductsGalleryComp,
+    SlideshowInfiniteComp,
   },
 
   data() {
@@ -135,20 +137,17 @@ export default defineComponent({
 
 /* PURSHASE INFO */
 .purshase-info {
-  background-color: var(--color-secondary);
-  --color-text: var(--color-background);
-}
-
-.purshase-info ul {
-  display: flex;
-  justify-content: space-between;
-  gap: 3rem;
+  --color-background: var(--color-secondary);
+  background-color: var(--color-background);
+  --color-text: var(--black);
 }
 
 .purshase-info li {
   max-width: 20rem;
+  min-width: 18rem;
   display: flex;
   gap: 1.125rem;
+  margin-left: 2rem;
 }
 
 .purshase-info__content {
@@ -175,17 +174,12 @@ export default defineComponent({
   .hero__img-wrapper {
     display: none;
   }
-
-  .purshase-info ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-left: 1rem;
+  .purshase-info .section__wrapper {
+    --padding-horizontal: 0;
   }
-}
-@media only screen and (max-width: 30rem) {
-  .purshase-info ul {
-    margin-left: 0;
+  .purshase-info .slideshow::before,
+  .purshase-info .slideshow::after {
+    content: none;
   }
 }
 </style>
