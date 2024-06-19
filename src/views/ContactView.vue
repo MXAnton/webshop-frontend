@@ -204,7 +204,7 @@ h1 {
 }
 .contact .section__wrapper > * {
   flex: 1 1 0;
-  min-width: 300px;
+  min-width: 20rem;
 }
 
 .contact__content-form {
@@ -224,5 +224,11 @@ h1 {
 }
 .thanks-for-contacting button {
   margin-top: 1rem;
+}
+
+@media only screen and (max-width: 25rem) {
+  .contact .section__wrapper > * {
+    min-width: 15rem;
+  }
 }
 </style>
