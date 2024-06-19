@@ -124,51 +124,56 @@ gsap.registerPlugin(ScrollTrigger);
 export default defineComponent({
   name: "AboutView",
   mounted() {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".why-us__content",
-        start: "top 40%",
-        end: "bottom 52%",
-        scrub: 1,
-        toggleActions: "restart none none none",
-        pin: ".why-us__header",
-        // markers: {
-        //   startColor: "purple",
-        //   endColor: "fuchsia",
-        //   fontSize: "3rem",
-        // },
-      },
-    });
+    let mm = gsap.matchMedia();
 
-    tl.to(".why-us__timeline", {
-      scaleY: 0.15,
-      duration: 0.1,
-      ease: "power1",
-    })
-      .to(".why-us__timeline", {
-        scaleY: 0.4,
-        duration: 0.3,
-        delay: 0.3,
-        ease: "power1",
-      })
-      .to(".why-us__timeline", {
-        scaleY: 0.6,
-        duration: 0.3,
-        delay: 0.5,
-        ease: "power1",
-      })
-      .to(".why-us__timeline", {
-        scaleY: 0.8,
-        duration: 0.3,
-        delay: 0.5,
-        ease: "power1",
-      })
-      .to(".why-us__timeline", {
-        scaleY: 1,
-        duration: 0.4,
-        delay: 0.3,
-        ease: "power1",
+    // media query for screens larger than 500px
+    mm.add("(min-width: 60rem)", () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".why-us__content",
+          start: "top 40%",
+          end: "bottom 52%",
+          scrub: 1,
+          toggleActions: "restart none none none",
+          pin: ".why-us__header",
+          // markers: {
+          //   startColor: "purple",
+          //   endColor: "fuchsia",
+          //   fontSize: "3rem",
+          // },
+        },
       });
+
+      tl.to(".why-us__timeline", {
+        scaleY: 0.15,
+        duration: 0.1,
+        ease: "power1",
+      })
+        .to(".why-us__timeline", {
+          scaleY: 0.4,
+          duration: 0.3,
+          delay: 0.3,
+          ease: "power1",
+        })
+        .to(".why-us__timeline", {
+          scaleY: 0.6,
+          duration: 0.3,
+          delay: 0.5,
+          ease: "power1",
+        })
+        .to(".why-us__timeline", {
+          scaleY: 0.8,
+          duration: 0.3,
+          delay: 0.5,
+          ease: "power1",
+        })
+        .to(".why-us__timeline", {
+          scaleY: 1,
+          duration: 0.4,
+          delay: 0.3,
+          ease: "power1",
+        });
+    });
   },
 });
 </script>
@@ -193,15 +198,15 @@ section {
 }
 .our-mission__content {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10rem;
+  grid-template-columns: minmax(auto, 65ch);
+  gap: 1rem;
 }
 
 /* why-us */
 .why-us__content {
   display: grid;
-  grid-template-columns: minmax(auto, 25rem) auto 1fr;
-  gap: 2rem;
+  grid-template-columns: minmax(auto, 65ch);
+  gap: 1.5rem;
 }
 .why-us__header {
   height: fit-content;
@@ -210,7 +215,7 @@ section {
   transform: scaleY(0);
   transform-origin: top;
 
-  margin-left: 8rem;
+  margin-left: calc(min(8rem, 10%));
 
   width: 2px;
   height: 100%;
@@ -236,5 +241,18 @@ section {
 }
 .join-us__content h2 {
   margin-bottom: 0.2em;
+}
+
+@media only screen and (min-width: 60rem) {
+  .our-mission__content {
+    grid-template-columns: auto 1fr;
+    gap: 10rem;
+  }
+
+  /* why-us */
+  .why-us__content {
+    grid-template-columns: minmax(auto, 25rem) auto 1fr;
+    gap: 2rem;
+  }
 }
 </style>
