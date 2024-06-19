@@ -12,12 +12,15 @@
 
         <li class="header--large">
           <div class="dropdown-1">
-            <router-link class="btn" to="/products/men">
+            <button class="btn">
               <span>Men</span>
-              <ExpandMoreIcon
-            /></router-link>
+              <ExpandMoreIcon />
+            </button>
 
             <ul class="dropdown__content">
+              <li>
+                <router-link to="/products/men">All</router-link>
+              </li>
               <li v-for="maleCategory in getMaleCategories" :key="maleCategory">
                 <router-link
                   :to="{
@@ -32,12 +35,15 @@
         </li>
         <li class="header--large">
           <div class="dropdown-1">
-            <router-link class="btn" to="/products/women">
+            <button class="btn">
               <span>Women</span>
-              <ExpandMoreIcon
-            /></router-link>
+              <ExpandMoreIcon />
+            </button>
 
             <ul class="dropdown__content">
+              <li>
+                <router-link to="/products/women">All</router-link>
+              </li>
               <li
                 v-for="femaleCategory in getFemaleCategories"
                 :key="femaleCategory"
@@ -103,12 +109,15 @@
               <ul>
                 <li>
                   <div class="dropdown-1">
-                    <router-link class="btn" to="/products/men">
+                    <button class="btn">
                       <span>Men</span>
-                      <ExpandMoreIcon
-                    /></router-link>
+                      <ExpandMoreIcon />
+                    </button>
 
                     <ul class="dropdown__content">
+                      <li>
+                        <router-link to="/products/men">All</router-link>
+                      </li>
                       <li
                         v-for="maleCategory in getMaleCategories"
                         :key="maleCategory"
@@ -126,12 +135,16 @@
                 </li>
                 <li>
                   <div class="dropdown-1">
-                    <router-link class="btn" to="/products/women">
+                    <button class="btn">
                       <span>Women</span>
-                      <ExpandMoreIcon
-                    /></router-link>
+                      <ExpandMoreIcon />
+                    </button>
 
                     <ul class="dropdown__content">
+                      <li>
+                        <router-link to="/products/women">All</router-link>
+                      </li>
+
                       <li
                         v-for="femaleCategory in getFemaleCategories"
                         :key="femaleCategory"
