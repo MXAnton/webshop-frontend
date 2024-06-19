@@ -117,7 +117,7 @@ footer h2 {
   display: grid;
   grid-template-columns: auto auto auto auto;
   justify-content: space-between;
-  gap: 4rem 3rem;
+  gap: 2rem 3rem;
 }
 .footer__top a {
   font-family: "Chivo Mono", monospace;
