@@ -420,6 +420,7 @@ export default defineComponent({
 .images .selected-image__wrapper {
   display: block;
   margin-bottom: 1rem;
+  width: 100%;
 
   position: relative;
 }
@@ -499,6 +500,7 @@ export default defineComponent({
 
 .images ul {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.75rem;
 }
 .images li button {
@@ -526,7 +528,7 @@ export default defineComponent({
 
   max-width: 80rem;
   width: 100%;
-  padding: 1rem 4rem;
+  padding: 1rem var(--padding-horizontal);
   margin: 0 auto;
 }
 
@@ -591,6 +593,8 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  max-width: 50ch;
 }
 
 .info__row,
@@ -686,5 +690,11 @@ export default defineComponent({
 .not-found p {
   font-size: 1.45rem;
   margin-bottom: 2em;
+}
+
+@media only screen and (max-width: 57rem) {
+  .product {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
