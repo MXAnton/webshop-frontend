@@ -92,7 +92,7 @@
           :id="'quantity-input'"
           :label="'Quantity'"
           :minValue="1"
-          :maxValue="Math.max(1, product.sizes[selectedSize].quantity)"
+          :maxValue="Math.max(1, product.sizes[selectedSizeIndex].quantity)"
           :startValue="quantity"
           @valueChanged="quantityChanged"
         ></NumberInput1Comp>
@@ -122,7 +122,8 @@
 
         <button
           class="btn--primary uppercase"
-          :disabled="product.sizes[selectedSize].quantity == 0"
+          :disabled="product.sizes[selectedSizeIndex].quantity == 0"
+          @click="addToCart"
         >
           Add to cart <ShoppingBagIcon />
         </button>
@@ -130,7 +131,7 @@
 
       <div
         class="out-of-stock"
-        v-if="product.sizes[selectedSize].quantity == 0"
+        v-if="product.sizes[selectedSizeIndex].quantity == 0"
       >
         <BlockIcon :color="'var(--yellow)'" :size="'1.25rem'" />
         <p>Out-of-stock</p>
@@ -271,6 +272,7 @@ import Dropdown2Comp from "@/components/Dropdown2Comp.vue";
 import ZoomInIcon from "@/components/icons/ZoomInIcon.vue";
 import ArrowIcon from "@/components/icons/ArrowIcon.vue";
 import CrossIcon from "@/components/icons/CrossIcon.vue";
+import store from "@/store";
 
 interface Product {
   product_id: number;
@@ -291,6 +293,7 @@ interface Color {
   color: string;
 }
 interface Size {
+  id: number;
   size: string;
   quantity: number;
 }
@@ -324,7 +327,7 @@ export default defineComponent({
       selectedImage: 0,
       images: [] as string[],
 
-      selectedSize: 0,
+      selectedSizeIndex: 0,
       quantity: 1,
     };
   },
@@ -371,7 +374,7 @@ export default defineComponent({
     },
 
     sizeChanged(_newValue: string) {
-      this.selectedSize = this.product.sizes.findIndex(
+      this.selectedSizeIndex = this.product.sizes.findIndex(
         (size) => size.size == _newValue
       );
     },
@@ -407,6 +410,18 @@ export default defineComponent({
       }
 
       this.selectedImage = newSelectedImage;
+    },
+
+    addToCart() {
+      const size = this.product.sizes[this.selectedSizeIndex];
+      if (size == null) {
+        return;
+      }
+      store.dispatch("addProductCart", {
+        id: size.id,
+        quantity: this.quantity,
+        quantity_available: size.quantity,
+      });
     },
   },
 

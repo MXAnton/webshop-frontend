@@ -15,6 +15,17 @@ interface Item {
   quantity: number;
 }
 
+interface Product {
+  id: number;
+  color_id: number;
+  size: number;
+  name: string;
+  price: number;
+  discount: number;
+  quantity: number;
+  quantity_available: number;
+}
+
 export default createStore({
   state: {
     maleCategories: [],
@@ -23,7 +34,7 @@ export default createStore({
     maleFilters: null,
     femaleFilters: null,
 
-    cart: [] as Item[],
+    cart: [] as Product[],
   },
   getters: {
     getMaleCategories(state) {
@@ -68,24 +79,7 @@ export default createStore({
       const items = data as Item[];
       setLocalStorageCart(items.map(({ id, quantity }) => ({ id, quantity })));
     },
-    UPSERT_PRODUCT_CART(state, data) {
-      const { id, quantity } = data;
-      const localStorageCart = getLocalStorageCart() as Item[];
 
-      // Find the index of the object with the given id
-      const index = localStorageCart.findIndex((item) => item.id === id);
-
-      if (index !== -1) {
-        // If found, update the object at that index
-        localStorageCart[index].quantity = quantity;
-      } else {
-        // If not found, add the new object to the array
-        localStorageCart.push({ id: id, quantity: quantity });
-      }
-
-      state.cart = localStorageCart;
-      setLocalStorageCart(localStorageCart);
-    },
     CLEAR_CART(state) {
       state.cart = [];
 
@@ -156,6 +150,45 @@ export default createStore({
       commit("SET_CART", itemsInfoMerged);
     },
 
+    async addProductCart({ dispatch }, data) {
+      const { id, quantity, quantity_available } = data;
+      const localStorageCart = getLocalStorageCart() as Item[];
+
+      // Find the index of the object with the given id
+      const index = localStorageCart.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        // If found, update the object at that index
+        localStorageCart[index].quantity = Math.min(
+          quantity_available || localStorageCart[index].quantity + quantity,
+          localStorageCart[index].quantity + quantity
+        );
+      } else {
+        // If not found, add the new object to the array
+        localStorageCart.push({ id: id, quantity: quantity });
+      }
+
+      setLocalStorageCart(localStorageCart);
+
+      await dispatch("fetchCart");
+    },
+    async upsertProductCart({ dispatch }, data) {
+      const { id, quantity } = data;
+      const localStorageCart = getLocalStorageCart() as Item[];
+
+      // Find the index of the object with the given id
+      const index = localStorageCart.findIndex((item) => item.id === id);
+      if (index !== -1) {
+        // If found, update the object at that index
+        localStorageCart[index].quantity = quantity;
+      } else {
+        // If not found, add the new object to the array
+        localStorageCart.push({ id: id, quantity: quantity });
+      }
+
+      setLocalStorageCart(localStorageCart);
+
+      await dispatch("fetchCart");
+    },
     async removeProductCart({ dispatch }, _productId) {
       const localStorageCart = getLocalStorageCart() as Item[];
 

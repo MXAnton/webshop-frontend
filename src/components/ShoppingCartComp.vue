@@ -105,17 +105,6 @@ import store from "@/store";
 import NumberInput1Comp from "./NumberInput1Comp.vue";
 import CrossIcon from "@/components/icons/CrossIcon.vue";
 
-interface Product {
-  id: number;
-  color_id: number;
-  size: number;
-  name: string;
-  price: number;
-  discount: number;
-  quantity: number;
-  quantity_available: number;
-}
-
 export default defineComponent({
   name: "ShoppingCartComp",
   components: {
@@ -123,10 +112,10 @@ export default defineComponent({
     CrossIcon,
   },
 
-  data() {
-    return {
-      products: [] as Product[],
-    };
+  computed: {
+    products() {
+      return store.state.cart;
+    },
   },
 
   methods: {
@@ -134,19 +123,16 @@ export default defineComponent({
       const product = this.products.find((item) => item.id === _id);
       if (product) {
         product.quantity = _newValue;
-        store.commit("UPSERT_PRODUCT_CART", product);
+        store.dispatch("upsertProductCart", product);
       }
     },
 
     async removeProduct(_id: number) {
       await store.dispatch("removeProductCart", _id);
-
-      this.products = store.getters.getCart;
     },
 
     clearCart() {
       store.commit("CLEAR_CART");
-      this.products = store.getters.getCart;
     },
   },
 
@@ -165,8 +151,6 @@ export default defineComponent({
     if (store.getters.getCart.length === 0) {
       await store.dispatch("fetchCart");
     }
-
-    this.products = store.getters.getCart;
   },
 });
 </script>

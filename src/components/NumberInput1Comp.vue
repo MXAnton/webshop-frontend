@@ -83,6 +83,10 @@ export default defineComponent({
     maxValue() {
       this.changedValue();
     },
+
+    startValue() {
+      this.value = this.startValue;
+    },
   },
 
   methods: {
