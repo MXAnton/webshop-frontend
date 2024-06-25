@@ -240,6 +240,8 @@ export default defineComponent({
   width: 100%;
   justify-content: center;
 
+  color: var(--black);
+
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
