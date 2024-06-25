@@ -5,7 +5,7 @@ import {
 } from "@/helpers";
 import {
   getProductsCategories,
-  getProductsColors,
+  getSizesByIds,
   getProductsFiltersBySex,
 } from "@/services/products";
 import { createStore } from "vuex";
@@ -63,13 +63,11 @@ export default createStore({
     SET_CART(state, data) {
       state.cart = data;
 
-      // Add only id, size and quantity to localstorage.
+      // Add only id and quantity to localstorage.
       // The remaining info we want to load fresh every time
       // to make sure price etc are up to date
       const items = data as Item[];
-      setLocalStorageCart(
-        items.map(({ id, size, quantity }) => ({ id, size, quantity }))
-      );
+      setLocalStorageCart(items.map(({ id, quantity }) => ({ id, quantity })));
     },
     CLEAR_CART(state) {
       state.cart = [];
@@ -108,9 +106,12 @@ export default createStore({
     async fetchCart({ commit }) {
       interface ItemInfo {
         id: number;
+        color_id: number;
+        size: number;
         name: string;
         price: number;
         discount: number;
+        quantity_available: number;
       }
 
       const localStorageCart = getLocalStorageCart() as Item[];
@@ -120,7 +121,7 @@ export default createStore({
         return;
       }
 
-      const res = await getProductsColors(
+      const res = await getSizesByIds(
         localStorageCart.map((_item) => _item.id)
       );
       if (res == null) {

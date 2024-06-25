@@ -3,15 +3,18 @@
     <div class="shopping-cart__wrapper">
       <ul>
         <li class="product" v-for="product in products" :key="product.id">
-          <RouterLink :to="'/product/' + product.id">
+          <RouterLink :to="'/product/' + product.color_id">
             <img
-              :src="'/products/' + product.id + '-1.jpg'"
+              :src="'/products/' + product.color_id + '-1.jpg'"
               alt="Image of shoe"
             />
           </RouterLink>
 
           <div class="product__content">
             <h2>{{ product.name }}</h2>
+
+            <p class="product__size">EU {{ product.size }}</p>
+            <p class="product__id">Article nr: {{ product.id }}</p>
 
             <p v-if="product.discount > 0">
               <span class="ordinary-price">{{ product.price }}</span
@@ -26,7 +29,7 @@
               :id="'quantity-input-' + product.id"
               :horizontal="true"
               :minValue="1"
-              :maxValue="Math.max(1, 5)"
+              :maxValue="Math.max(1, product.quantity_available)"
               :startValue="product.quantity"
               @valueChanged="quantityChanged($event, product.id)"
             ></NumberInput1Comp>
@@ -94,10 +97,13 @@ import CrossIcon from "@/components/icons/CrossIcon.vue";
 
 interface Product {
   id: number;
+  color_id: number;
+  size: number;
   name: string;
   price: number;
   discount: number;
   quantity: number;
+  quantity_available: number;
 }
 
 export default defineComponent({
@@ -129,8 +135,8 @@ export default defineComponent({
 
   async created() {
     // store.commit("SET_CART", [
-    //   { id: 6, size: 44, quantity: 4 },
-    //   { id: 4, size: 46, quantity: 1 },
+    //   { id: 6, quantity: 4 },
+    //   { id: 4, quantity: 1 },
     // ]);
 
     if (store.getters.getCart.length === 0) {
@@ -181,17 +187,28 @@ export default defineComponent({
   width: 100%;
   display: grid;
   grid-template-columns: 1fr auto auto;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto 1fr;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0 0.25rem;
 }
 
 .product__content h2 {
   height: fit-content;
+  grid-column: 1 / span 2;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.product .product__size {
+  grid-column: 3;
+
+  font-size: 0.75rem;
+}
+.product .product__id {
   grid-column: 1 / span 3;
 
-  font-size: 0.75em;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-style: italic;
 }
 .product p {
   font-size: 0.875rem;
