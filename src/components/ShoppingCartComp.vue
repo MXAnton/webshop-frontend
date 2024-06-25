@@ -45,13 +45,19 @@
         <p
           class="price-discount"
           v-if="
-            products.reduce((sum, product) => sum + product.discount, 0) > 0
+            products.reduce(
+              (sum, product) => sum + product.quantity * product.discount,
+              0
+            ) > 0
           "
         >
           Total discount:
           <span class="euro">{{
             Math.round(
-              products.reduce((sum, product) => sum + product.discount, 0) * 100
+              products.reduce(
+                (sum, product) => sum + product.quantity * product.discount,
+                0
+              ) * 100
             ) / 100
           }}</span>
         </p>
@@ -62,7 +68,8 @@
             {{
               Math.round(
                 products.reduce(
-                  (sum, product) => sum + product.price - product.discount,
+                  (sum, product) =>
+                    sum + product.quantity * (product.price - product.discount),
                   0
                 ) * 100
               ) / 100
