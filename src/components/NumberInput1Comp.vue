@@ -1,7 +1,24 @@
 <template>
   <div class="number-1">
     <label v-if="label != null" :for="id">{{ label }}:</label>
-    <div>
+    <div v-if="horizontal" class="horizontal">
+      <button @click="decreaseValue" class="btn-decrease">
+        <RemoveIcon />
+      </button>
+      <input
+        type="number"
+        :name="id"
+        :id="id"
+        :min="minValue"
+        :max="maxValue"
+        v-model="value"
+        @input="changedValue"
+      />
+      <button @click="increaseValue" class="btn-increase">
+        <AddIcon />
+      </button>
+    </div>
+    <div v-else>
       <input
         type="number"
         :name="id"
@@ -36,6 +53,10 @@ export default defineComponent({
     id: {
       type: String,
       required: true,
+    },
+    horizontal: {
+      type: Boolean,
+      default: false,
     },
     label: String,
     minValue: {
@@ -154,5 +175,25 @@ input[type="number"] {
 }
 .number-1 .btn-decrease:active svg {
   transform: rotate(-90deg);
+}
+
+.number-1 > div.horizontal {
+  grid-template-columns: auto 3em auto;
+}
+.number-1 .horizontal input {
+  padding: 0em 0.5em;
+  height: 1.5rem;
+  grid-row: 1;
+  grid-column: 2;
+  border-left: 1px solid var(--color-secondary);
+}
+.horizontal button {
+  grid-column: 3;
+  grid-row: 1;
+  border: none;
+}
+.horizontal .btn-decrease {
+  grid-row: 1;
+  grid-column: 1;
 }
 </style>

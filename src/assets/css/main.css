@@ -415,11 +415,21 @@ p.long {
 
 .btn--icon {
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn--link {
+  font-family: "Arvo", serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.03em;
 }
 
 .btn--primary:disabled,
 .btn--secondary:disabled,
-.btn--icon:disabled {
+.btn--icon:disabled,
+.btn--link:disabled {
   cursor: not-allowed;
   filter: grayscale(1);
 }

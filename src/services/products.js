@@ -69,6 +69,20 @@ export async function getProducts(
   return response;
 }
 
+export async function getProductsColors(_ids) {
+  const response = await axiosInstance
+    .get("products-colors/" + _ids)
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}
+
 export async function getProductColor(_id) {
   const response = await axiosInstance
     .get("product/color/" + _id)

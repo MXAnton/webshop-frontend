@@ -89,10 +89,11 @@
             <FavoriteIcon width="32" height="32"
           /></router-link>
         </li>
-        <li>
-          <router-link to="/basket" class="btn--icon">
+        <li class="shopping-cart">
+          <router-link to="/shopping-cart" class="btn--icon">
             <ShoppingBagIcon width="32" height="32"
           /></router-link>
+          <ShoppingCartComp />
         </li>
         <li>
           <router-link to="/account" class="btn--icon">
@@ -186,6 +187,7 @@ import AccountCircleIcon from "@/components/icons/AccountCircleIcon.vue";
 import HamburgerMenuIcon from "@/components/icons/HamburgerMenuIcon.vue";
 
 import store from "@/store";
+import ShoppingCartComp from "./ShoppingCartComp.vue";
 
 export default defineComponent({
   name: "HeaderComp",
@@ -195,6 +197,7 @@ export default defineComponent({
     ShoppingBagIcon,
     AccountCircleIcon,
     HamburgerMenuIcon,
+    ShoppingCartComp,
   },
 
   data() {
@@ -264,6 +267,21 @@ header a {
 .btn--logo img {
   width: 100%;
   height: 100%;
+}
+
+.shopping-cart {
+  position: relative;
+}
+.shopping-cart > div {
+  display: none;
+
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 2;
+}
+.shopping-cart:hover > div {
+  display: block;
 }
 
 /* ____ HAMBURGER MENU NAV ___ */
