@@ -155,6 +155,24 @@ export default createStore({
 
       commit("SET_CART", itemsInfoMerged);
     },
+
+    async removeProductCart({ dispatch }, _productId) {
+      const localStorageCart = getLocalStorageCart() as Item[];
+
+      // Find the index of the object with the given id
+      const index = localStorageCart.findIndex(
+        (item) => item.id === _productId
+      );
+      if (index === -1) {
+        return;
+      }
+
+      // Remove product from cart
+      localStorageCart.splice(index, 1);
+      setLocalStorageCart(localStorageCart);
+
+      await dispatch("fetchCart");
+    },
   },
   modules: {},
 });

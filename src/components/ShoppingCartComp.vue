@@ -34,7 +34,10 @@
               @valueChanged="quantityChanged($event, product.id)"
             ></NumberInput1Comp>
 
-            <button class="btn--circle btn--icon btn--close">
+            <button
+              class="btn--circle btn--icon btn--close"
+              @click="removeProduct(product.id)"
+            >
               <CrossIcon :size="'0.875rem'" />
             </button>
           </div>
@@ -135,6 +138,12 @@ export default defineComponent({
       }
     },
 
+    async removeProduct(_id: number) {
+      await store.dispatch("removeProductCart", _id);
+
+      this.products = store.getters.getCart;
+    },
+
     clearCart() {
       store.commit("CLEAR_CART");
       this.products = store.getters.getCart;
@@ -144,7 +153,13 @@ export default defineComponent({
   async created() {
     // store.commit("SET_CART", [
     //   { id: 6, quantity: 4 },
-    //   { id: 4, quantity: 1 },
+    //   { id: 9, quantity: 1 },
+    //   { id: 14, quantity: 1 },
+    //   { id: 15, quantity: 4 },
+    //   { id: 10, quantity: 2 },
+    //   { id: 11, quantity: 7 },
+    //   { id: 12, quantity: 2 },
+    //   { id: 13, quantity: 3 },
     // ]);
 
     if (store.getters.getCart.length === 0) {
