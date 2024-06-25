@@ -131,6 +131,7 @@ export default defineComponent({
       const product = this.products.find((item) => item.id === _id);
       if (product) {
         product.quantity = _newValue;
+        store.commit("UPSERT_PRODUCT_CART", product);
       }
     },
 

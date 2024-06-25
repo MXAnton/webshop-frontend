@@ -12,7 +12,6 @@ import { createStore } from "vuex";
 
 interface Item {
   id: number;
-  size: number;
   quantity: number;
 }
 
@@ -24,7 +23,7 @@ export default createStore({
     maleFilters: null,
     femaleFilters: null,
 
-    cart: [],
+    cart: [] as Item[],
   },
   getters: {
     getMaleCategories(state) {
@@ -68,6 +67,24 @@ export default createStore({
       // to make sure price etc are up to date
       const items = data as Item[];
       setLocalStorageCart(items.map(({ id, quantity }) => ({ id, quantity })));
+    },
+    UPSERT_PRODUCT_CART(state, data) {
+      const { id, quantity } = data;
+      const localStorageCart = getLocalStorageCart() as Item[];
+
+      // Find the index of the object with the given id
+      const index = localStorageCart.findIndex((item) => item.id === id);
+
+      if (index !== -1) {
+        // If found, update the object at that index
+        localStorageCart[index].quantity = quantity;
+      } else {
+        // If not found, add the new object to the array
+        localStorageCart.push({ id: id, quantity: quantity });
+      }
+
+      state.cart = localStorageCart;
+      setLocalStorageCart(localStorageCart);
     },
     CLEAR_CART(state) {
       state.cart = [];
@@ -125,13 +142,10 @@ export default createStore({
         localStorageCart.map((_item) => _item.id)
       );
       if (res == null) {
-        // commit("SET_CART", []);
+        commit("SET_CART", []);
         return;
       }
       const itemsExtras = res.data.data as ItemInfo[];
-
-      console.log(localStorageCart);
-      console.log(itemsExtras);
 
       // Merge arrays based on 'id' property
       const itemsInfoMerged = itemsExtras.map((item1) => {
