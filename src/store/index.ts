@@ -13,6 +13,7 @@ import { createStore } from "vuex";
 interface Item {
   id: number;
   quantity: number;
+  date_added: number;
 }
 
 interface Product {
@@ -24,6 +25,7 @@ interface Product {
   discount: number;
   quantity: number;
   quantity_available: number;
+  date_added: number;
 }
 
 export default createStore({
@@ -77,7 +79,13 @@ export default createStore({
       // The remaining info we want to load fresh every time
       // to make sure price etc are up to date
       const items = data as Item[];
-      setLocalStorageCart(items.map(({ id, quantity }) => ({ id, quantity })));
+      setLocalStorageCart(
+        items.map(({ id, quantity, date_added }) => ({
+          id,
+          quantity,
+          date_added,
+        }))
+      );
     },
 
     CLEAR_CART(state) {
@@ -164,7 +172,11 @@ export default createStore({
         );
       } else {
         // If not found, add the new object to the array
-        localStorageCart.push({ id: id, quantity: quantity });
+        localStorageCart.push({
+          id: id,
+          quantity: quantity,
+          date_added: new Date().getTime(),
+        });
       }
 
       setLocalStorageCart(localStorageCart);
@@ -182,7 +194,11 @@ export default createStore({
         localStorageCart[index].quantity = quantity;
       } else {
         // If not found, add the new object to the array
-        localStorageCart.push({ id: id, quantity: quantity });
+        localStorageCart.push({
+          id: id,
+          quantity: quantity,
+          date_added: new Date().getTime(),
+        });
       }
 
       setLocalStorageCart(localStorageCart);

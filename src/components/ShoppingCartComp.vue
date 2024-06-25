@@ -114,7 +114,7 @@ export default defineComponent({
 
   computed: {
     products() {
-      return store.state.cart;
+      return store.state.cart.sort((a, b) => a.date_added - b.date_added);
     },
   },
 
