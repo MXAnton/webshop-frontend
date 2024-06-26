@@ -160,12 +160,12 @@ export default defineComponent({
 
 <style scoped>
 .shopping-cart__wrapper {
-  width: 20rem;
+  width: 22rem;
 
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding: 0.75rem 1rem 1rem;
+  padding: 0.75rem 0 1rem;
 
   background-color: var(--color-background);
   border-radius: 4px;
@@ -179,6 +179,11 @@ export default defineComponent({
 .shopping-cart__wrapper ul {
   display: flex;
   flex-direction: column;
+
+  padding: 0 1rem;
+  max-height: 60svh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .product {
   border-bottom: 1px solid var(--color-text);
@@ -250,6 +255,7 @@ export default defineComponent({
 
 /* MAIN */
 .shopping-cart__main {
+  padding: 0 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
