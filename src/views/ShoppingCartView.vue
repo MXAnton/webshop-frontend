@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main :class="{ disabled: checkingOut }">
     <section class="section--shopping-cart">
       <div class="section__wrapper">
         <h1 class="uppercase">Shopping cart</h1>
@@ -15,8 +15,9 @@
             class="btn--primary uppercase"
             type="submit"
             id="checkout-button"
+            :disabled="checkingOut === true"
           >
-            Checkout
+            {{ checkingOut ? "Loading..." : "Checkout" }}
           </button>
         </form>
       </div>
@@ -30,6 +31,10 @@
       </div>
     </section>
   </main>
+
+  <div v-if="checkingOut" class="loading-overlay">
+    <div class="loader"></div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -55,6 +60,8 @@ export default defineComponent({
   data() {
     return {
       bestSellingShoes: [],
+
+      checkingOut: false,
     };
   },
 
@@ -70,6 +77,8 @@ export default defineComponent({
     },
 
     async checkout() {
+      this.checkingOut = true;
+
       const productsEssentials = store.getters.getCart.map(
         (product: Product) => ({
           id: product.id,
@@ -80,6 +89,7 @@ export default defineComponent({
 
       const res = await createCheckoutSession(productsEssentials);
       if (res === null) {
+        this.checkingOut = false;
         return;
       }
       window.location.href = res?.data.data;
@@ -93,6 +103,45 @@ export default defineComponent({
 </script>
 
 <style scoped>
+main.disabled {
+  pointer-events: none;
+}
+
+.loading-overlay {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  z-index: 5;
+}
+.loading-overlay .loader {
+  position: absolute;
+  top: calc(50% - 5rem);
+  left: calc(50% - 5rem);
+
+  border: 1rem solid var(--white);
+  border-top: 1rem solid var(--black);
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  animation: spin 2s ease-in-out infinite;
+
+  opacity: 0.8;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(40deg);
+  }
+  100% {
+    transform: rotate(400deg);
+  }
+}
+
 section {
   padding-top: 5rem;
 }
