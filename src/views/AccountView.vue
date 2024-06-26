@@ -2,7 +2,7 @@
   <main>
     <section class="hero">
       <div class="section__wrapper">
-        <h1 class="uppercase">Favorites</h1>
+        <h1 class="uppercase">My account</h1>
 
         <p class="long">Under development</p>
       </div>
@@ -14,7 +14,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "FavoritesView",
+  name: "AccountView",
 });
 </script>
 
