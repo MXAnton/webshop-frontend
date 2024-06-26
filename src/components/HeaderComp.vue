@@ -79,25 +79,28 @@
               placeholder="Search your shoe"
             />
             <label for="search-input"
-              ><SearchIcon width="32" height="32"
+              ><SearchIcon width="2rem" height="2rem"
             /></label>
           </div>
         </li> -->
 
         <li>
           <router-link to="/saved-shoes" class="btn--icon">
-            <FavoriteIcon width="32" height="32"
+            <FavoriteIcon width="2rem" height="2rem"
           /></router-link>
         </li>
         <li class="shopping-cart">
           <router-link to="/shopping-cart" class="btn--icon">
-            <ShoppingBagIcon width="32" height="32"
-          /></router-link>
+            <ShoppingBagIcon width="2rem" height="2rem" /><span
+              class="shopping-cart__amount"
+              >{{ cartProductsAmount }}</span
+            ></router-link
+          >
           <ShoppingCartComp />
         </li>
         <li>
           <router-link to="/account" class="btn--icon">
-            <AccountCircleIcon width="32" height="32"
+            <AccountCircleIcon width="2rem" height="2rem"
           /></router-link>
         </li>
         <li class="header--medium">
@@ -206,18 +209,25 @@ export default defineComponent({
     };
   },
 
-  watch: {
-    $route() {
-      this.menuOpen = false;
-    },
-  },
-
   computed: {
     getMaleCategories() {
       return store.getters.getMaleCategories;
     },
     getFemaleCategories() {
       return store.getters.getFemaleCategories;
+    },
+
+    cartProductsAmount() {
+      return store.state.cart.reduce(
+        (amount, product) => amount + product.quantity,
+        0
+      );
+    },
+  },
+
+  watch: {
+    $route() {
+      this.menuOpen = false;
     },
   },
 });
@@ -272,6 +282,24 @@ header a {
 .shopping-cart {
   position: relative;
 }
+.shopping-cart__amount {
+  position: absolute;
+
+  right: 0;
+  bottom: -15%;
+  transform: translateX(30%);
+
+  font-size: 0.75rem;
+  height: 1.5em;
+  padding: 0 0.5em;
+  border-radius: 0.75em;
+  background-color: var(--color-background);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .shopping-cart > div {
   display: none;
 
