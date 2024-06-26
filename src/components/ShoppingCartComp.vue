@@ -229,7 +229,7 @@ export default defineComponent({
 }
 .product p .discounted-price {
   font-weight: 600;
-  --color-text: var(--red);
+  --color-text: var(--red--dark);
 }
 
 .quantity-input {
@@ -258,7 +258,7 @@ export default defineComponent({
 .price-discount {
   font-size: 0.75rem;
   font-weight: 600;
-  --color-text: var(--red);
+  --color-text: var(--red--dark);
 }
 .shopping-cart__main .btn--primary {
   width: 100%;
