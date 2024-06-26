@@ -18,10 +18,10 @@
 
     <section>
       <div class="section__wrapper">
-        <router-link to="/shopping-cart" class="btn--primary"
+        <router-link to="/shopping-cart" class="btn--primary uppercase"
           >Go to cart</router-link
         >
-        <router-link to="/select-sex" class="btn--primary"
+        <router-link to="/select-sex" class="btn--primary uppercase"
           >Browse more shoes</router-link
         >
       </div>

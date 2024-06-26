@@ -18,7 +18,7 @@
 
     <section>
       <div class="section__wrapper">
-        <router-link to="/select-sex" class="btn--primary"
+        <router-link to="/select-sex" class="btn--primary uppercase"
           >Browse more shoes</router-link
         >
       </div>
