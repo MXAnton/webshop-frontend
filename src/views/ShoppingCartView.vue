@@ -1,25 +1,21 @@
 <template>
   <main>
-    <section class="section--hero">
-      <div class="section__wrapper">
-        <h1 class="uppercase">Shopping cart</h1>
-      </div>
-    </section>
-
     <section class="section--shopping-cart">
       <div class="section__wrapper">
+        <h1 class="uppercase">Shopping cart</h1>
+
         <ShoppingCartComp
           :idPrefix="'shopping-cart-view'"
           :haveGoToCartBtn="false"
           :productsListHasScroll="false"
         />
-      </div>
-    </section>
 
-    <section>
-      <div class="section__wrapper">
         <form @submit.prevent="checkout">
-          <button class="btn--primary" type="submit" id="checkout-button">
+          <button
+            class="btn--primary uppercase"
+            type="submit"
+            id="checkout-button"
+          >
             Checkout
           </button>
         </form>
@@ -75,17 +71,17 @@ section {
   padding-top: 5rem;
   padding-bottom: 5rem;
 }
-
-.section--hero {
-  padding-bottom: 0;
+.section__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
+
 h1 {
   margin-bottom: 0.2em;
   text-align: center;
-}
-
-.section--shopping-cart {
-  padding-top: 0;
 }
 
 @media only screen and (max-width: 25rem) {
@@ -95,6 +91,9 @@ h1 {
 }
 </style>
 <style>
+.section--shopping-cart .shopping-cart {
+  width: 100%;
+}
 .section--shopping-cart .shopping-cart__wrapper {
   width: 100%;
   max-width: 30rem;
