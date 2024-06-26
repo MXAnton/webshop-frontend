@@ -57,6 +57,14 @@ const routes: Array<RouteRecordRaw> = [
         /* webpackChunkName: "checkoutSuccess" */ "../views/CheckoutSuccessView.vue"
       ),
   },
+  {
+    path: "/checkout-cancel",
+    name: "checkoutCancel",
+    component: () =>
+      import(
+        /* webpackChunkName: "checkoutCancel" */ "../views/CheckoutCancelView.vue"
+      ),
+  },
 
   {
     path: "/account",
