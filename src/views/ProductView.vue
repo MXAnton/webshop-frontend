@@ -513,6 +513,8 @@ export default defineComponent({
   padding: 1rem;
   border: none;
   background-color: rgba(0, 0, 0, 0.274);
+
+  z-index: 3;
 }
 .zoomed-image > .btn--arrow {
   position: absolute;
@@ -533,6 +535,11 @@ export default defineComponent({
 }
 .zoomed-image__wrapper {
   position: relative;
+
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .zoomed-image__wrapper img {
   object-fit: contain;
