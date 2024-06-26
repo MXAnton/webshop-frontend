@@ -35,10 +35,18 @@ const routes: Array<RouteRecordRaw> = [
       import(/* webpackChunkName: "product" */ "../views/ProductView.vue"),
   },
   {
+    path: "/favorites",
+    name: "favorites",
+    component: () =>
+      import(/* webpackChunkName: "favorites" */ "../views/FavoritesView.vue"),
+  },
+  {
     path: "/shopping-cart",
     name: "shoppingCart",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ShoppingCartView.vue"),
+      import(
+        /* webpackChunkName: "shoppingCart" */ "../views/ShoppingCartView.vue"
+      ),
   },
 
   {
@@ -54,7 +62,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/contact",
     name: "contact",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/ContactView.vue"),
+      import(/* webpackChunkName: "contact" */ "../views/ContactView.vue"),
   },
 
   {

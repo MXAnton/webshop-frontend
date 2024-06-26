@@ -85,7 +85,7 @@
         </li> -->
 
         <li>
-          <router-link to="/saved-shoes" class="btn--icon">
+          <router-link to="/favorites" class="btn--icon">
             <FavoriteIcon width="2rem" height="2rem"
           /></router-link>
         </li>
