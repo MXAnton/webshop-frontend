@@ -160,7 +160,8 @@ export default defineComponent({
 
 <style scoped>
 .shopping-cart__wrapper {
-  width: 22rem;
+  min-width: calc(min(24rem, 90svw));
+  width: 100%;
 
   display: flex;
   flex-direction: column;

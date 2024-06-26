@@ -236,6 +236,8 @@ export default defineComponent({
 
 <style scoped>
 header {
+  position: relative;
+
   width: 100%;
   max-width: 80rem;
 
@@ -280,7 +282,8 @@ header a {
   height: 100%;
 }
 
-.shopping-cart {
+.shopping-cart,
+.shopping-cart > button {
   position: relative;
 }
 .shopping-cart__amount {
@@ -381,6 +384,24 @@ header a {
   .btn--logo {
     width: 2.5rem;
     height: 2.5rem;
+  }
+}
+@media only screen and (max-width: 40rem) {
+  .shopping-cart {
+    position: static;
+  }
+  .shopping-cart > div {
+    top: calc(100% - 1rem);
+    right: var(--padding-horizontal);
+    left: var(--padding-horizontal);
+    width: calc(100% - 2 * var(--padding-horizontal));
+  }
+}
+@media only screen and (max-width: 25rem) {
+  .shopping-cart > div {
+    right: 0;
+    left: 0;
+    width: 100%;
   }
 }
 </style>
