@@ -21,12 +21,21 @@
         </form>
       </div>
     </section>
+
+    <section class="best-sellers">
+      <div class="section__wrapper">
+        <h2 class="uppercase">Customers also liked these</h2>
+
+        <ProductsGalleryComp :shoes="bestSellingShoes" />
+      </div>
+    </section>
   </main>
 </template>
 
 <script lang="ts">
+import ProductsGalleryComp from "@/components/ProductsGalleryComp.vue";
 import ShoppingCartComp from "@/components/ShoppingCartComp.vue";
-import { createCheckoutSession } from "@/services/products";
+import { createCheckoutSession, getBestSellers } from "@/services/products";
 import store from "@/store";
 import { defineComponent } from "vue";
 
@@ -40,13 +49,26 @@ export default defineComponent({
   name: "ShoppingCartView",
   components: {
     ShoppingCartComp,
+    ProductsGalleryComp,
   },
 
   data() {
-    return {};
+    return {
+      bestSellingShoes: [],
+    };
   },
 
   methods: {
+    async loadBestSellingShoes() {
+      const res = await getBestSellers(3);
+      if (res == null) {
+        this.bestSellingShoes = [];
+        return;
+      }
+
+      this.bestSellingShoes = res.data.data;
+    },
+
     async checkout() {
       const productsEssentials = store.getters.getCart.map(
         (product: Product) => ({
@@ -63,13 +85,16 @@ export default defineComponent({
       window.location.href = res?.data.data;
     },
   },
+
+  created() {
+    this.loadBestSellingShoes();
+  },
 });
 </script>
 
 <style scoped>
 section {
   padding-top: 5rem;
-  padding-bottom: 5rem;
 }
 .section__wrapper {
   width: 100%;
@@ -81,6 +106,9 @@ section {
 
 h1 {
   margin-bottom: 0.2em;
+  text-align: center;
+}
+h2 {
   text-align: center;
 }
 
