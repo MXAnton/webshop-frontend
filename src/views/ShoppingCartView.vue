@@ -11,6 +11,7 @@
         <ShoppingCartComp
           :idPrefix="'shopping-cart-view'"
           :haveGoToCartBtn="false"
+          :productsListHasScroll="false"
         />
       </div>
     </section>

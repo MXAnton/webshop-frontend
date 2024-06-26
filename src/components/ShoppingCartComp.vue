@@ -1,7 +1,7 @@
 <template>
   <div class="shopping-cart">
     <div class="shopping-cart__wrapper">
-      <ul>
+      <ul :class="{ scrollable: productsListHasScroll }">
         <li class="product" v-for="product in products" :key="product.id">
           <RouterLink :to="'/product/' + product.color_id">
             <img
@@ -124,6 +124,10 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    productsListHasScroll: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -182,6 +186,8 @@ export default defineComponent({
   flex-direction: column;
 
   padding: 0 1rem;
+}
+.shopping-cart__wrapper ul.scrollable {
   max-height: 60svh;
   overflow-y: scroll;
   overflow-x: hidden;
