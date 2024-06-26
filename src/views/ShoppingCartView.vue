@@ -15,12 +15,30 @@
         />
       </div>
     </section>
+
+    <section>
+      <div class="section__wrapper">
+        <form @submit.prevent="checkout">
+          <button class="btn--primary" type="submit" id="checkout-button">
+            Checkout
+          </button>
+        </form>
+      </div>
+    </section>
   </main>
 </template>
 
 <script lang="ts">
 import ShoppingCartComp from "@/components/ShoppingCartComp.vue";
+import { createCheckoutSession } from "@/services/products";
+import store from "@/store";
 import { defineComponent } from "vue";
+
+interface Product {
+  id: number;
+  quantity: number;
+  color_id: number;
+}
 
 export default defineComponent({
   name: "ShoppingCartView",
@@ -32,7 +50,23 @@ export default defineComponent({
     return {};
   },
 
-  methods: {},
+  methods: {
+    async checkout() {
+      const productsEssentials = store.getters.getCart.map(
+        (product: Product) => ({
+          id: product.id,
+          quantity: product.quantity,
+          image: `${window.location.origin}/products/${product.color_id}-1.jpg`,
+        })
+      );
+
+      const res = await createCheckoutSession(productsEssentials);
+      if (res === null) {
+        return;
+      }
+      window.location.href = res?.data.data;
+    },
+  },
 });
 </script>
 

@@ -123,3 +123,17 @@ export async function getBestSellers(_amount) {
 
   return response;
 }
+
+export async function createCheckoutSession(_products) {
+  const response = await axiosInstance
+    .post("create-checkout-session/", { products: JSON.stringify(_products) })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.warn(err);
+      return null;
+    });
+
+  return response;
+}
