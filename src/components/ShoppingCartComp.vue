@@ -256,7 +256,7 @@ export default defineComponent({
   font-weight: 700;
 }
 .price-discount {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   --color-text: var(--red--dark);
 }
