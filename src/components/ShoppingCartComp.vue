@@ -26,7 +26,7 @@
 
             <NumberInput1Comp
               class="quantity-input"
-              :id="'quantity-input-' + product.id"
+              :id="idPrefix + '-quantity-input-' + product.id"
               :horizontal="true"
               :minValue="1"
               :maxValue="Math.max(1, product.quantity_available)"
@@ -81,6 +81,7 @@
         </p>
 
         <router-link
+          v-if="haveGoToCartBtn"
           to="/shopping-cart"
           class="btn--primary uppercase"
           :class="{ disabled: products.length === 0 }"
@@ -89,6 +90,7 @@
         </router-link>
 
         <button
+          v-if="haveGoToCartBtn"
           class="btn--link"
           :disabled="products.length === 0"
           @click="clearCart"
@@ -111,6 +113,17 @@ export default defineComponent({
   components: {
     NumberInput1Comp,
     CrossIcon,
+  },
+
+  props: {
+    idPrefix: {
+      type: String,
+      default: "1",
+    },
+    haveGoToCartBtn: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -138,17 +151,6 @@ export default defineComponent({
   },
 
   async created() {
-    // store.commit("SET_CART", [
-    //   { id: 6, quantity: 4 },
-    //   { id: 9, quantity: 1 },
-    //   { id: 14, quantity: 1 },
-    //   { id: 15, quantity: 4 },
-    //   { id: 10, quantity: 2 },
-    //   { id: 11, quantity: 7 },
-    //   { id: 12, quantity: 2 },
-    //   { id: 13, quantity: 3 },
-    // ]);
-
     if (store.getters.getCart.length === 0) {
       await store.dispatch("fetchCart");
     }
