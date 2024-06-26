@@ -40,12 +40,21 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "favorites" */ "../views/FavoritesView.vue"),
   },
+
   {
     path: "/shopping-cart",
     name: "shoppingCart",
     component: () =>
       import(
         /* webpackChunkName: "shoppingCart" */ "../views/ShoppingCartView.vue"
+      ),
+  },
+  {
+    path: "/checkout-success",
+    name: "checkoutSuccess",
+    component: () =>
+      import(
+        /* webpackChunkName: "checkoutSuccess" */ "../views/CheckoutSuccessView.vue"
       ),
   },
 
