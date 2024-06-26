@@ -429,7 +429,11 @@ p.long {
 .btn--primary:disabled,
 .btn--secondary:disabled,
 .btn--icon:disabled,
-.btn--link:disabled {
+.btn--link:disabled,
+.btn--primary.disabled,
+.btn--secondary.disabled,
+.btn--icon.disabled,
+.btn--link.disabled {
   cursor: not-allowed;
   filter: grayscale(1);
 }

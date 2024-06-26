@@ -90,13 +90,13 @@
           /></router-link>
         </li>
         <li class="shopping-cart">
-          <router-link to="/shopping-cart" class="btn--icon">
+          <button class="btn--icon">
             <ShoppingBagIcon width="2rem" height="2rem" /><span
               id="shopping-cart-amount"
               class="shopping-cart__amount"
               >{{ cartProductsAmount }}</span
-            ></router-link
-          >
+            >
+          </button>
           <ShoppingCartComp />
         </li>
         <li>
@@ -294,6 +294,7 @@ header a {
   height: 1.5em;
   padding: 0 0.5em;
   border-radius: 0.75em;
+  font-weight: 600;
   background-color: var(--color-background);
 
   display: flex;

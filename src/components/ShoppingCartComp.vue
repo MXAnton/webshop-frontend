@@ -80,12 +80,13 @@
           >
         </p>
 
-        <button
+        <router-link
+          to="/shopping-cart"
           class="btn--primary uppercase"
-          :disabled="products.length === 0"
+          :class="{ disabled: products.length === 0 }"
         >
           {{ products.length === 0 ? "Cart is empty" : "Go to cart" }}
-        </button>
+        </router-link>
 
         <button
           class="btn--link"
