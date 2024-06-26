@@ -2,7 +2,7 @@
   <main>
     <section class="section--hero">
       <div class="section__wrapper">
-        <h1 class="uppercase">Payment was canceled or went wrong</h1>
+        <h1 class="uppercase">Payment was canceled</h1>
       </div>
     </section>
 
@@ -18,6 +18,9 @@
 
     <section>
       <div class="section__wrapper">
+        <router-link to="/shopping-cart" class="btn--primary"
+          >Go to cart</router-link
+        >
         <router-link to="/select-sex" class="btn--primary"
           >Browse more shoes</router-link
         >
@@ -49,7 +52,9 @@ h1 {
 }
 
 .section__wrapper {
-  display: grid;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 </style>
