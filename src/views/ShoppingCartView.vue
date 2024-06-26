@@ -53,6 +53,12 @@ h1 {
 .section--shopping-cart {
   padding-top: 0;
 }
+
+@media only screen and (max-width: 25rem) {
+  .section--shopping-cart {
+    --padding-horizontal: 0;
+  }
+}
 </style>
 <style>
 .section--shopping-cart .shopping-cart__wrapper {
