@@ -2,7 +2,7 @@
   <main>
     <section class="section--hero">
       <div class="section__wrapper">
-        <h1>Shopping cart</h1>
+        <h1 class="uppercase">Shopping cart</h1>
       </div>
     </section>
 
