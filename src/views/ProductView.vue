@@ -346,6 +346,7 @@ export default defineComponent({
       const prevProductId = this.product.product_id;
       const prevColors = this.product.colors;
       this.selectedImage = 0;
+      this.quantity = 1;
       this.product = {} as Product;
 
       const res = await getProductColor(this.$route.params.id);
