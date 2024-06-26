@@ -92,6 +92,7 @@
         <li class="shopping-cart">
           <router-link to="/shopping-cart" class="btn--icon">
             <ShoppingBagIcon width="2rem" height="2rem" /><span
+              id="shopping-cart-amount"
               class="shopping-cart__amount"
               >{{ cartProductsAmount }}</span
             ></router-link

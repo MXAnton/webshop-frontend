@@ -125,7 +125,7 @@
           :disabled="product.sizes[selectedSizeIndex].quantity == 0"
           @click="addToCart"
         >
-          Add to cart <ShoppingBagIcon />
+          Add to cart <span ref="addToCartIcon"><ShoppingBagIcon /></span>
         </button>
       </div>
 
@@ -423,6 +423,43 @@ export default defineComponent({
         quantity: this.quantity,
         quantity_available: size.quantity,
       });
+
+      this.shootProductToCart();
+    },
+
+    shootProductToCart() {
+      // Create a new div element
+      let shoppingCartFlying = document.createElement("div");
+      // Add the class 'shopping-cart-flying' to the new div
+      shoppingCartFlying.classList.add("shopping-cart-flying");
+      // Set text to added quantity
+      shoppingCartFlying.innerText = this.quantity.toString();
+      // Append the new div to the app (grand parent) element
+      const appElement = document.getElementById("app") as HTMLElement;
+      appElement.appendChild(shoppingCartFlying);
+
+      // Set initial position of the moving element
+      const fromElement = this.$refs.addToCartIcon as HTMLElement;
+      const fromRect = fromElement.getBoundingClientRect();
+      shoppingCartFlying.style.transform = `translate(${fromRect.left}px, ${fromRect.top}px)`;
+
+      // Trigger the move
+      requestAnimationFrame(() => {
+        // Set transition duration
+        shoppingCartFlying.style.transition = "0.5s transform ease-out";
+
+        // Get and set target position
+        const targetElement = document.getElementById(
+          "shopping-cart-amount"
+        ) as HTMLElement;
+        const targetRect = targetElement.getBoundingClientRect();
+        shoppingCartFlying.style.transform = `translate(${targetRect.left}px, ${targetRect.top}px)`;
+      });
+
+      // Remove after 500ms
+      setTimeout(() => {
+        shoppingCartFlying.remove();
+      }, 500);
     },
   },
 
@@ -627,6 +664,16 @@ export default defineComponent({
 }
 .buy-cta svg {
   font-size: 1.5em;
+}
+.buy-cta button {
+  position: relative;
+  transition: 0.1s ease-in-out transform;
+}
+.buy-cta button:active {
+  transform: scale(0.95);
+}
+.buy-cta button:active svg {
+  animation: shake 0.2s infinite;
 }
 
 .out-of-stock {
